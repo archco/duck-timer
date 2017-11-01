@@ -9,7 +9,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha --require babel-register",
+    "test": "node node_modules/mocha/bin/mocha",
     "build": "node node_modules/webpack/bin/webpack --hide-modules",
     "watch": "npm run build -- --watch"
   },
@@ -33,5 +33,8 @@
     "presets": [
       "env"
     ]
+  },
+  "dependencies": {
+    "eventemitter3": "^2.0.3"
   }
 }
