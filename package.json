@@ -2,9 +2,16 @@
   "name": "duck-timer",
   "version": "0.1.0",
   "description": "The helpful timer for browser.",
-  "main": "index.js",
+  "main": "lib/duck-timer.js",
+  "module": "lib/duck-timer.mod.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha --require babel-register"
+    "test": "node node_modules/mocha/bin/mocha --require babel-register",
+    "build": "node node_modules/webpack/bin/webpack --hide-modules",
+    "watch": "npm run build -- --watch"
   },
   "keywords": [
     "timer",
@@ -13,12 +20,18 @@
   "author": "archco",
   "license": "MIT",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
-    "mocha": "^4.0.1"
+    "mocha": "^4.0.1",
+    "uglifyjs-webpack-plugin": "^1.0.1",
+    "webpack": "^3.8.1"
   },
   "babel": {
-    "presets": ["env"]
+    "presets": [
+      "env"
+    ]
   }
 }
