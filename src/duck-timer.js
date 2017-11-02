@@ -1,4 +1,7 @@
 import EventEmitter from 'eventemitter3';
+import TimeClock from './time-clock';
+
+export { TimeClock };
 
 export default class DuckTimer extends EventEmitter {
   constructor(option = {}) {
