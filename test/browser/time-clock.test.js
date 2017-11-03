@@ -41,12 +41,12 @@ describe('TimeClock', () => {
     });
   });
 
-  describe('#setDuration', () => {
+  describe('#setDistance', () => {
     let clock;
 
     before(() => {
       clock = new TimeClock();
-      clock.setDuration('2017-11-01', '2017-11-30 21:00:00');
+      clock.setDistance('2017-11-01', '2017-11-30 21:00:00');
     });
 
     it('startDate and endDate properties are instanceof Date.', () => {
@@ -54,9 +54,9 @@ describe('TimeClock', () => {
       expect(clock.endDate).to.instanceOf(Date);
     });
 
-    it('duration will returns time between startDate and endDate as instance of TimeClock.', () => {
-      expect(clock.duration).to.instanceOf(TimeClock);
-      expect(clock.duration.time).to.be.a('number');
+    it('distance will returns time between startDate and endDate as instance of TimeClock.', () => {
+      expect(clock.distance).to.instanceOf(TimeClock);
+      expect(clock.distance.time).to.be.a('number');
     });
 
     it('remain property will returns as instance of TimeClock.', () => {

@@ -3,39 +3,75 @@ export default class TimeClock {
     this.time = milliseconds;
     this.startDate = undefined;
     this.endDate = undefined;
-    this.duration = undefined;
+    this.distance = undefined;
   }
 
+  /**
+   * Returns seconds part.
+   *
+   * @return {Number}
+   */
   get seconds() {
     return Math.floor((this.time % (1000 * 60)) / 1000);
   }
 
+  /**
+   * Returns minutes part.
+   *
+   * @return {Number}
+   */
   get minutes() {
     return Math.floor((this.time % (1000 * 60 * 60)) / (1000 * 60));
   }
 
+  /**
+   * Returns hours part.
+   *
+   * @return {Number}
+   */
   get hours() {
     return Math.floor((this.time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   }
 
+  /**
+   * Returns days part.
+   *
+   * @return {Number}
+   */
   get days() {
     return Math.floor(this.time / (1000 * 60 * 60 * 24));
   }
 
+  /**
+   * Returns remain time until endDate.
+   *
+   * @return {TimeClock}
+   */
   get remain() {
-    if (!this.duration) return undefined;
-    return new TimeClock(this.duration.time - this.time);
+    if (!this.distance) return undefined;
+    return new TimeClock(this.distance.time - this.time);
   }
 
-  setDuration(start, end) {
+  /**
+   * Set startDate, endDate and distnace.
+   *
+   * @param {Date|String} start
+   * @param {Date|String} end
+   */
+  setDistance(start, end) {
     this.startDate = start instanceof Date ? start : new Date(start);
     this.endDate = end instanceof Date ? end : new Date(end);
 
-    this.duration = new TimeClock(
+    this.distance = new TimeClock(
       this.endDate.getTime() - this.startDate.getTime()
     );
   }
 
+  /**
+   * toTimeString
+   *
+   * @return {String}  e.g. '2d 05h 33m 21s 420ms'
+   */
   toTimeString() {
     let str = '';
 
