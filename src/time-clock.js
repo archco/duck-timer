@@ -7,39 +7,39 @@ export default class TimeClock {
   }
 
   /**
-   * Returns seconds part.
+   * Return time as seconds.
    *
    * @return {Number}
    */
   get seconds() {
-    return Math.floor((this.time % (1000 * 60)) / 1000);
+    return parseInt(this.time / 1000);
   }
 
   /**
-   * Returns minutes part.
+   * Return time as minutes.
    *
    * @return {Number}
    */
   get minutes() {
-    return Math.floor((this.time % (1000 * 60 * 60)) / (1000 * 60));
+    return parseInt(this.time / (1000 * 60));
   }
 
   /**
-   * Returns hours part.
+   * Return time as hours.
    *
    * @return {Number}
    */
   get hours() {
-    return Math.floor((this.time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    return parseInt(this.time / (1000 * 60 * 60));
   }
 
   /**
-   * Returns days part.
+   * Return time as days.
    *
    * @return {Number}
    */
   get days() {
-    return Math.floor(this.time / (1000 * 60 * 60 * 24));
+    return parseInt(this.time / (1000 * 60 * 60 * 24));
   }
 
   /**
@@ -68,30 +68,47 @@ export default class TimeClock {
   }
 
   /**
+   * Returns to data object.
+   *
+   * @return {Object}
+   */
+  toData() {
+    let t = this.time;
+    return {
+      day: Math.floor(t / (1000 * 60 * 60 * 24)),
+      hour: Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+      min: Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)),
+      sec: Math.floor((t % (1000 * 60)) / 1000),
+      ms: t % 1000,
+    };
+  }
+
+  /**
    * toTimeString
    *
    * @return {String}  e.g. '2d 05h 33m 21s 420ms'
    */
   toTimeString() {
     let str = '';
+    let t = this.toData();
 
-    if (this.days > 0) {
-      str += `${this.days}d`;
+    if (t.day > 0) {
+      str += `${t.day}d`;
     }
 
-    if (str.length > 0 || this.hours > 0) {
-      str += ` ${this.hours.toString().padStart(2, '0')}h`;
+    if (str.length > 0 || t.hour > 0) {
+      str += ` ${t.hour.toString().padStart(2, '0')}h`;
     }
 
-    if (str.length > 0 || this.minutes > 0) {
-      str += ` ${this.minutes.toString().padStart(2, '0')}m`;
+    if (str.length > 0 || t.min > 0) {
+      str += ` ${t.min.toString().padStart(2, '0')}m`;
     }
 
-    if (str.length > 0 || this.seconds > 0) {
-      str += ` ${this.seconds.toString().padStart(2, '0')}s`;
+    if (str.length > 0 || t.sec > 0) {
+      str += ` ${t.sec.toString().padStart(2, '0')}s`;
     }
 
-    str += ` ${this.time % 1000}ms`;
+    str += ` ${t.ms}ms`;
 
     return str.trim();
   }

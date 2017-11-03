@@ -1,6 +1,6 @@
 describe('TimeClock', () => {
   describe('constructor', () => {
-    it('Time property is exists.', () => {
+    it('First argument is milliseconds time.', () => {
       let clock = new TimeClock(1000);
       expect(clock).to.be.instanceOf(TimeClock);
       expect(clock.time).to.equal(1000);
@@ -8,8 +8,10 @@ describe('TimeClock', () => {
   });
 
   describe('getters', () => {
-    it('seconds: 3000 milliseconds equal to 3 seconds.', () => {
+    it('seconds: 3000-3999 milliseconds equal to 3 seconds.', () => {
       let clock = new TimeClock(3000);
+      expect(clock.seconds).to.equal(3);
+      clock.time = 3600;
       expect(clock.seconds).to.equal(3);
     });
 
@@ -26,6 +28,18 @@ describe('TimeClock', () => {
     it('days: 604,800,000 milliseconds equal to 7 days.', () => {
       let clock = new TimeClock(604800000);
       expect(clock.days).to.equal(7);
+    });
+  });
+
+  describe('#toData', () => {
+    let clock = new TimeClock(8764500000);
+
+    it('Returns time value to data object.', () => {
+      expect(clock.toData()).to.be.an('object');
+    });
+
+    it("Data have keys: ['day', 'hour', 'min', 'sec', 'ms']", () => {
+      expect(clock.toData()).to.have.all.keys(['day', 'hour', 'min', 'sec', 'ms']);
     });
   });
 
