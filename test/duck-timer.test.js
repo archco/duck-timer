@@ -1,7 +1,6 @@
 import chai from 'chai';
 import sinon from 'sinon';
-import DuckTimer from '../lib/duck-timer.mod';
-import { TimeClock } from '../lib/duck-timer.mod';
+import DuckTimer, { TimeClock } from '../lib/duck-timer.mod';
 const expect = chai.expect;
 
 describe('DuckTimer', () => {
@@ -13,13 +12,6 @@ describe('DuckTimer', () => {
   });
 
   describe('options', () => {
-    it('setGoal: set goal date value to "clock.endDate"', () => {
-      let timer = new DuckTimer({ setGoal: '2010-11-01' });
-      let endDate = timer.getClock().endDate;
-      expect(endDate).to.be.instanceOf(Date);
-      expect(endDate.getFullYear()).to.equal(2010);
-    });
-
     it('setTime: set time value(milliseconds).', () => {
       let timer = new DuckTimer({ setTime: 1200 });
       expect(timer.time).to.equal(1200);
@@ -30,20 +22,21 @@ describe('DuckTimer', () => {
       expect(timer.option.interval).to.equal(1000);
     });
 
-    it('countdown: boolean option for determine whether time will countdown until date.', () => {
-      let timer = new DuckTimer({ countdown: true });
-      expect(timer.option.countdown).to.be.a('boolean');
-      expect(timer.option.countdown).to.be.true;
-    });
-
     it('onInterval: callback function.', () => {
       let timer = new DuckTimer({ onInterval: (res) => console.log(res) });
       expect(timer.option.onInterval).to.be.a('function');
       expect(timer.getEventEmitter().listeners('interval', true)).to.be.true;
     });
+
+    it('countdownDate: set endDate value to "timeClock"', () => {
+      let timer = new DuckTimer({ countdownDate: '2010-11-01' });
+      let endDate = timer.getClock().endDate;
+      expect(endDate).to.be.instanceOf(Date);
+      expect(endDate.getFullYear()).to.equal(2010);
+    });
   });
 
-  describe('Feature: Timer callback', () => {
+  describe('Feature: Interval callback', () => {
     let clock;
 
     beforeEach(() => {
@@ -66,7 +59,7 @@ describe('DuckTimer', () => {
     it('If interval set 100 milliseconds and clock passed 1 sec, then callback called 10 times.', () => { //jscs:ignore
       let timer = new DuckTimer({ interval: 100 });
       let count = 0;
-      timer.setInterval(100, () => count++).start();
+      timer.onInterval(() => count++).start();
       clock.tick(1000);
       expect(count).to.equal(10);
     });
@@ -116,6 +109,26 @@ describe('DuckTimer', () => {
   });
 
   describe('Feature: Countdown', () => {
-    // body...
+    let clock;
+    let timer;
+
+    beforeEach(() => {
+      clock = sinon.useFakeTimers();
+      timer = new DuckTimer({ interval: 60000, tick: 10 });
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
+    it('works.', () => {
+      let m = 5;
+      timer.setCountdown('2017-11-03 00:05:00', '2017-11-03 00:00:00')
+        .onInterval(res => {
+          m--;
+          expect(res.remain.minutes).to.equal(m);
+        }).start();
+      clock.tick(300000);
+    });
   });
 });

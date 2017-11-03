@@ -7,8 +7,8 @@ export default class DuckTimer {
   constructor(option = {}) {
     this._timeClock = new TimeClock();
     this._event = new EventEmitter();
-    this._timePaused = false;
     this._intervalId = undefined;
+    this._isPaused = false;
     this.setOption(option);
   }
 
@@ -25,11 +25,10 @@ export default class DuckTimer {
   getDefaultOption() {
     return {
       setTime: 0,
-      setGoal: undefined,
       tick: 10,
       interval: 100,
       onInterval: undefined, // callback function on interval.
-      countdown: false,
+      countdownDate: undefined,
       eventName: {
         interval: 'interval',
         done: 'done',
@@ -40,7 +39,7 @@ export default class DuckTimer {
   setOption(option = {}) {
     this.option = Object.assign(this.getDefaultOption(), option);
     this.time = this.option.setTime;
-    if (this.option.setGoal) this.setGoal(this.option.setGoal);
+    if (this.option.countdownDate) this.setCountdown(this.option.countdownDate);
     if (this.option.onInterval) {
       this.setInterval(this.option.interval, this.option.onInterval);
     }
@@ -56,7 +55,7 @@ export default class DuckTimer {
     return this._event;
   }
 
-  setGoal(date, startDate = 'now') {
+  setCountdown(date, startDate = 'now') {
     this._timeClock.setDistance(startDate, date);
     return this;
   }
@@ -79,8 +78,8 @@ export default class DuckTimer {
   }
 
   start() {
-    if (this._timePaused) {
-      this._timePaused = false;
+    if (this._isPaused) {
+      this._isPaused = false;
     } else {
       this._intervalId = setInterval(
         this._intervalProcess.bind(this),
@@ -90,30 +89,22 @@ export default class DuckTimer {
   }
 
   stop() {
-    this._timePaused = true;
+    this._isPaused = true;
   }
 
   reset() {
     clearInterval(this._intervalId);
-    this._timePaused = false;
+    this._isPaused = false;
     this.time = 0;
   }
 
   // private
 
   _intervalProcess() {
-    if (this._timePaused) return;
-    this._timeCount();
+    if (this._isPaused) return;
+    this.time += this.option.tick;
     if (this.time % this.option.interval == 0) {
       this._event.emit(this.option.eventName.interval, this._timeClock);
-    }
-  }
-
-  _timeCount() {
-    if (this.option.countdown) {
-      this.time -= this.option.tick;
-    } else {
-      this.time += this.option.tick;
     }
   }
 }

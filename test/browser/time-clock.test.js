@@ -1,7 +1,6 @@
 /************************************************************
-  Brower test.
+  Browser test.
 *************************************************************/
-const TimeClock = mod.TimeClock;
 
 describe('TimeClock', () => {
   describe('constructor', () => {
