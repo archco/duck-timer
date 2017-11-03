@@ -60,10 +60,10 @@ export default class DuckTimer {
     return this;
   }
 
-  setInterval(ms, callback) {
+  setInterval(ms, callback = null) {
     this.option.interval = ms;
     if (typeof callback === 'function') {
-      this._event.on(this.option.eventName.interval, callback);
+      this.onInterval(callback);
     }
 
     return this;
