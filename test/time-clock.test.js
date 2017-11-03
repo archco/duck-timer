@@ -1,7 +1,3 @@
-import chai from 'chai';
-import { TimeClock } from '../lib/duck-timer.mod';
-const expect = chai.expect;
-
 describe('TimeClock', () => {
   describe('constructor', () => {
     it('Time property is exists.', () => {

@@ -1,8 +1,3 @@
-import chai from 'chai';
-import sinon from 'sinon';
-import DuckTimer, { TimeClock } from '../lib/duck-timer.mod';
-const expect = chai.expect;
-
 describe('DuckTimer', () => {
   describe('constructor', () => {
     it('constructible.', () => {
