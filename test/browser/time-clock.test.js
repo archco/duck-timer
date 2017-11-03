@@ -1,6 +1,7 @@
-import chai from 'chai';
-import { TimeClock } from '../lib/duck-timer.mod';
-const expect = chai.expect;
+/************************************************************
+  Brower test.
+*************************************************************/
+const TimeClock = mod.TimeClock;
 
 describe('TimeClock', () => {
   describe('constructor', () => {

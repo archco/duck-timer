@@ -1,6 +1,9 @@
 export default class TimeClock {
-  constructor(time = 0) {
-    this.time = time; // milliseconds.
+  constructor(milliseconds = 0) {
+    this.time = milliseconds;
+    this.startDate = undefined;
+    this.endDate = undefined;
+    this.duration = undefined;
   }
 
   get seconds() {
@@ -17,6 +20,20 @@ export default class TimeClock {
 
   get days() {
     return Math.floor(this.time / (1000 * 60 * 60 * 24));
+  }
+
+  get remain() {
+    if (!this.duration) return undefined;
+    return new TimeClock(this.duration.time - this.time);
+  }
+
+  setDuration(start, end) {
+    this.startDate = start instanceof Date ? start : new Date(start);
+    this.endDate = end instanceof Date ? end : new Date(end);
+
+    this.duration = new TimeClock(
+      this.endDate.getTime() - this.startDate.getTime()
+    );
   }
 
   toTimeString() {
