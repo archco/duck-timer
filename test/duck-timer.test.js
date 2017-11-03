@@ -1,6 +1,7 @@
 import chai from 'chai';
 import sinon from 'sinon';
 import DuckTimer from '../lib/duck-timer.mod';
+import { TimeClock } from '../lib/duck-timer.mod';
 const expect = chai.expect;
 
 describe('DuckTimer', () => {
@@ -12,11 +13,11 @@ describe('DuckTimer', () => {
   });
 
   describe('options', () => {
-    it('setDate: set Date value to "timer.date"', () => {
-      let timer = new DuckTimer({ setDate: '' });
-      expect(timer.date).to.be.instanceOf(Date);
-      timer = new DuckTimer({ setDate: '2010-11-01' });
-      expect(timer.date.getFullYear()).to.equal(2010);
+    it('setGoal: set goal date value to "clock.endDate"', () => {
+      let timer = new DuckTimer({ setGoal: '2010-11-01' });
+      let endDate = timer.getClock().endDate;
+      expect(endDate).to.be.instanceOf(Date);
+      expect(endDate.getFullYear()).to.equal(2010);
     });
 
     it('setTime: set time value(milliseconds).', () => {
@@ -38,7 +39,7 @@ describe('DuckTimer', () => {
     it('onInterval: callback function.', () => {
       let timer = new DuckTimer({ onInterval: (res) => console.log(res) });
       expect(timer.option.onInterval).to.be.a('function');
-      expect(timer.listeners('interval', true)).to.be.true;
+      expect(timer.getEventEmitter().listeners('interval', true)).to.be.true;
     });
   });
 
@@ -53,20 +54,19 @@ describe('DuckTimer', () => {
       clock.restore();
     });
 
-    it('interval callback\'s argument is not empty.', () => {
-      let timer = new DuckTimer({ interval: 1000 });
-      timer.on('interval', res => {
+    it('interval callback\'s response is not empty.', () => {
+      let timer = new DuckTimer();
+      timer.setInterval(1000, res => {
         expect(res).is.not.empty;
-      });
-      timer.start();
+        expect(res).to.be.instanceOf(TimeClock);
+      }).start();
       clock.tick(1000);
     });
 
     it('If interval set 100 milliseconds and clock passed 1 sec, then callback called 10 times.', () => { //jscs:ignore
       let timer = new DuckTimer({ interval: 100 });
       let count = 0;
-      timer.on('interval', () => count++);
-      timer.start();
+      timer.setInterval(100, () => count++).start();
       clock.tick(1000);
       expect(count).to.equal(10);
     });
@@ -87,10 +87,8 @@ describe('DuckTimer', () => {
 
     describe('#start', () => {
       it('call start(), then time running.', () => {
-        timer.on('interval', res => {
-          expect(res.time).to.equal(1000);
-        });
-        timer.start();
+        timer.onInterval(res => expect(res.time).to.equal(1000))
+          .start();
         clock.tick(1000);
       });
     });
