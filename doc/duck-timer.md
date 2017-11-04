@@ -29,7 +29,7 @@ Attach callback function on `interval` event.
 ```js
 duckTimer.onInterval(callback);
 ```
-- Param `function` callback
+- Param `Function` callback
 - Return `DuckTimer`
 
 ### setInterval

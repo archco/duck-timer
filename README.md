@@ -2,13 +2,15 @@
 The helpful timer class for browser and node.js.
 
 ## Installation
--- not yet..
+```sh
+npm install duck-timer
+```
 
 ## Usage
 ### Stopwatch
 ```js
 import DuckTimer from 'duck-timer';
-const timer = new DuckTimer({ interval: 100 }); // interval value: 100ms = 0.1sec.
+const timer = new DuckTimer({ interval: 100 }); // interval time: 100ms = 0.1sec.
 
 // start.
 timer.onInterval(res => {
