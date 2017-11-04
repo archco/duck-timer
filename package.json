@@ -5,6 +5,7 @@
   "main": "lib/duck-timer.js",
   "module": "lib/duck-timer.mod.js",
   "directories": {
+    "doc": "doc",
     "lib": "lib",
     "test": "test"
   },
@@ -19,6 +20,14 @@
   ],
   "author": "archco",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/archco/duck-timer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/archco/duck-timer/issues"
+  },
+  "homepage": "https://github.com/archco/duck-timer#readme",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
