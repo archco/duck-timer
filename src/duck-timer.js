@@ -7,7 +7,7 @@ export default class DuckTimer {
   constructor(option = {}) {
     this._timeClock = new TimeClock();
     this._event = new EventEmitter();
-    this._intervalId = undefined;
+    this._tickIntevalId = null;
     this._isPaused = false;
     this.setOption(option);
   }
@@ -26,23 +26,25 @@ export default class DuckTimer {
     return {
       setTime: 0,
       tick: 10,
-      interval: 100,
-      onInterval: undefined, // callback function on interval.
+      interval: undefined,
+      timeout: undefined,
+      onInterval: undefined,
+      onTimeout: undefined,
       countdownDate: undefined,
       eventName: {
         interval: 'interval',
-        done: 'done',
+        timeout: 'timeout',
       },
     };
   }
 
   setOption(option = {}) {
-    this.option = Object.assign(this.getDefaultOption(), option);
+    this.option = this.option || {};
+    this.option = Object.assign(this.getDefaultOption(), this.option, option);
     this.time = this.option.setTime;
+    this.onInterval(this.option.onInterval);
+    this.onTimeout(this.option.onTimeout);
     if (this.option.countdownDate) this.setCountdown(this.option.countdownDate);
-    if (this.option.onInterval) {
-      this.setInterval(this.option.interval, this.option.onInterval);
-    }
 
     return this;
   }
@@ -62,10 +64,7 @@ export default class DuckTimer {
 
   setInterval(ms, callback = null) {
     this.option.interval = ms;
-    if (typeof callback === 'function') {
-      this.onInterval(callback);
-    }
-
+    this.onInterval(callback);
     return this;
   }
 
@@ -77,12 +76,26 @@ export default class DuckTimer {
     return this;
   }
 
+  setTimeout(ms, callback = null) {
+    this.option.timeout = ms;
+    this.onTimeout(callback);
+    return this;
+  }
+
+  onTimeout(callback) {
+    if (typeof callback === 'function') {
+      this._event.on(this.option.eventName.timeout, callback);
+    }
+
+    return this;
+  }
+
   start() {
-    if (this._isPaused) {
-      this._isPaused = false;
-    } else {
-      this._intervalId = setInterval(
-        this._intervalProcess.bind(this),
+    if (this._isPaused) this._isPaused = false;
+
+    if (!this._hasTick()) {
+      this._tickIntevalId = setInterval(
+        this._tickProcess.bind(this),
         this.option.tick
       );
     }
@@ -93,18 +106,41 @@ export default class DuckTimer {
   }
 
   reset() {
-    clearInterval(this._intervalId);
+    this._clearTick();
     this._isPaused = false;
     this.time = 0;
   }
 
   // private
 
-  _intervalProcess() {
+  _tickProcess() {
     if (this._isPaused) return;
     this.time += this.option.tick;
+
+    // Interval.
     if (this.time % this.option.interval == 0) {
       this._event.emit(this.option.eventName.interval, this._timeClock);
     }
+
+    // Timeout.
+    if (this.time >= this.option.timeout) {
+      this._event.emit(this.option.eventName.timeout, this._timeClock);
+      this._clearTick();
+    }
+
+    // Countdown finished.
+    if (this.getClock().remain && this.getClock().remain.time <= 0) {
+      this._event.emit(this.option.eventName.timeout, this._timeClock);
+      this._clearTick();
+    }
+  }
+
+  _clearTick() {
+    clearInterval(this._tickIntevalId);
+    this._tickIntevalId = null;
+  }
+
+  _hasTick() {
+    return this._tickIntevalId != null;
   }
 }

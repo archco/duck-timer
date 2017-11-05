@@ -18,9 +18,20 @@ describe('DuckTimer', () => {
     });
 
     it('onInterval: callback function.', () => {
-      let timer = new DuckTimer({ onInterval: (res) => console.log(res) });
+      let timer = new DuckTimer({ onInterval: res => console.log(res) });
       expect(timer.option.onInterval).to.be.a('function');
       expect(timer.getEventEmitter().listeners('interval', true)).to.be.true;
+    });
+
+    it('timeout: Set timeout time(milliseconds).', () => {
+      let timer = new DuckTimer({ timeout: 1000 });
+      expect(timer.option.timeout).to.equal(1000);
+    });
+
+    it('onTimeout: callback function that invoke when timeout done or countdown finished.', () => {
+      let timer = new DuckTimer({ onTimeout: res => console.log(res) });
+      expect(timer.option.onTimeout).to.be.a('function');
+      expect(timer.getEventEmitter().listeners('timeout', true)).to.be.true;
     });
 
     it('countdownDate: set endDate value to "timeClock"', () => {
@@ -57,6 +68,35 @@ describe('DuckTimer', () => {
       timer.onInterval(() => count++).start();
       clock.tick(1000);
       expect(count).to.equal(10);
+    });
+  });
+
+  describe('Feature: Timeout callback', () => {
+    let clock;
+
+    beforeEach(() => {
+      clock = sinon.useFakeTimers();
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
+    it('If timeout time is come, then "timeout" event is occured.', () => {
+      let timer = new DuckTimer({ timeout: 3000 });
+      let occured = false;
+      timer.onTimeout(res => {
+        expect(res).to.be.instanceOf(TimeClock);
+        occured = true;
+      }).start();
+      clock.tick(3000);
+      expect(occured).to.be.true;
+
+      // again.
+      occured = false;
+      timer.start();
+      clock.tick(3000);
+      expect(occured).to.be.true;
     });
   });
 
@@ -109,7 +149,7 @@ describe('DuckTimer', () => {
 
     beforeEach(() => {
       clock = sinon.useFakeTimers();
-      timer = new DuckTimer({ interval: 60000, tick: 10 });
+      timer = new DuckTimer();
     });
 
     afterEach(() => {
@@ -119,11 +159,21 @@ describe('DuckTimer', () => {
     it('works.', () => {
       let m = 5;
       timer.setCountdown('2017-11-03 00:05:00', '2017-11-03 00:00:00')
-        .onInterval(res => {
+        .setInterval(60000, res => {
           m--;
           expect(res.remain.minutes).to.equal(m);
         }).start();
       clock.tick(300000);
+    });
+
+    it('When countdown finished, "timeout" event is occured.', () => {
+      let occured = false;
+      timer.setCountdown('2017-11-03 00:05:00', '2017-11-03 00:00:00')
+        .onTimeout(res => {
+          occured = true;
+        }).start();
+      clock.tick(300000);
+      expect(occured).to.be.true;
     });
   });
 });

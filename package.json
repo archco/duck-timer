@@ -1,7 +1,7 @@
 {
   "name": "duck-timer",
   "version": "0.1.0",
-  "description": "The helpful timer for browser.",
+  "description": "The helpful timer class for browser and node.js.",
   "main": "lib/duck-timer.js",
   "module": "lib/duck-timer.mod.js",
   "directories": {
