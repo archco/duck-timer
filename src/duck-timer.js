@@ -14,14 +14,29 @@ export default class DuckTimer {
 
   // public
 
+  /**
+   * time getter.
+   *
+   * @return {Number} milliseconds.
+   */
   get time() {
-    return this._timeClock.time;
+    return this.getClock().time;
   }
 
+  /**
+   * time setter.
+   *
+   * @param  {Number} val milliseconds.
+   */
   set time(val) {
-    this._timeClock.time = val;
+    this.getClock().time = val;
   }
 
+  /**
+   * getDefaultOption
+   *
+   * @return {Object}
+   */
   getDefaultOption() {
     return {
       setTime: 0,
@@ -38,6 +53,11 @@ export default class DuckTimer {
     };
   }
 
+  /**
+   * setOption
+   *
+   * @param {Object} [option = {}]
+   */
   setOption(option = {}) {
     this.option = this.option || {};
     this.option = Object.assign(this.getDefaultOption(), this.option, option);
@@ -49,25 +69,55 @@ export default class DuckTimer {
     return this;
   }
 
+  /**
+   * Return TimeClock.
+   *
+   * @return {TimeClock}
+   */
   getClock() {
     return this._timeClock;
   }
 
+  /**
+   * Return EventEmitter.
+   *
+   * @return {EventEmitter}
+   */
   getEventEmitter() {
     return this._event;
   }
 
+  /**
+   * Set dates for countdown.
+   *
+   * @param {Date|String} date
+   * @param {Date|String} [startDate = 'now']
+   * @return {DuckTimer}
+   */
   setCountdown(date, startDate = 'now') {
     this._timeClock.setDistance(startDate, date);
     return this;
   }
 
+  /**
+   * Set interval time. and set callback function (optional).
+   *
+   * @param {Number} ms
+   * @param {Function} [callback = null]
+   * @return {DuckTimer}
+   */
   setInterval(ms, callback = null) {
     this.option.interval = ms;
     this.onInterval(callback);
     return this;
   }
 
+  /**
+   * Attach callback function on interval event.
+   *
+   * @param  {Function} callback
+   * @return {DuckTimer}
+   */
   onInterval(callback) {
     if (typeof callback === 'function') {
       this._event.on(this.option.eventName.interval, callback);
@@ -76,12 +126,25 @@ export default class DuckTimer {
     return this;
   }
 
+  /**
+   * Set timeout time. and set callback function (optional).
+   *
+   * @param {Number} ms
+   * @param {Function} [callback = null]
+   * @return {DuckTimer}
+   */
   setTimeout(ms, callback = null) {
     this.option.timeout = ms;
     this.onTimeout(callback);
     return this;
   }
 
+  /**
+   * Attach callback function on timeout event.
+   *
+   * @param  {Function} callback
+   * @return {DuckTimer}
+   */
   onTimeout(callback) {
     if (typeof callback === 'function') {
       this._event.on(this.option.eventName.timeout, callback);
@@ -90,6 +153,9 @@ export default class DuckTimer {
     return this;
   }
 
+  /**
+   * Start clock.
+   */
   start() {
     if (this._isPaused) this._isPaused = false;
 
@@ -101,10 +167,16 @@ export default class DuckTimer {
     }
   }
 
+  /**
+   * Stop clock.
+   */
   stop() {
     this._isPaused = true;
   }
 
+  /**
+   * Reset clock.
+   */
   reset() {
     this._clearTick();
     this._isPaused = false;
