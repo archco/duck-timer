@@ -177,4 +177,21 @@ describe('DuckTimer', () => {
       expect(occured).to.be.true;
     });
   });
+
+  describe('#getClock', () => {
+    it('Return instance of TimeClock.', () => {
+      let timer = new DuckTimer({ setTime: 3000 });
+      expect(timer.getClock()).to.be.instanceOf(TimeClock);
+      expect(timer.getClock().seconds).to.equal(3);
+    });
+  });
+
+  describe('#getEventEmitter', () => {
+    it('Return instance of eventemitter3', () => {
+      let timer = new DuckTimer();
+      timer.setInterval(1000, res => console.log(res));
+      expect(timer.getEventEmitter()).to.be.an('object');
+      expect(timer.getEventEmitter().listeners('interval')).is.not.empty;
+    });
+  });
 });

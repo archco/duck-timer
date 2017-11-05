@@ -9,12 +9,12 @@ let duckTimer = new DuckTimer(option = {});
 - options
 ```js
 let defaultOpion = {
-  setTime: 0, // {Number} Set default time (milliseconds)
-  tick: 10, // {Number} Time of one ticking.
-  interval: undefined, // {Number} Interval time value.
-  timeout: undefined, // {Number} Timeout time value.
-  onInterval: undefined, // {function} callback function on interval.
-  onTimeout: undefined, // {function} callback function on timeout.
+  setTime: 0,               // {Number} Set default time (milliseconds)
+  tick: 10,                 // {Number} Time of one ticking.
+  interval: undefined,      // {Number} Interval time value.
+  timeout: undefined,       // {Number} Timeout time value.
+  onInterval: undefined,    // {function} callback function on interval.
+  onTimeout: undefined,     // {function} callback function on timeout.
   countdownDate: undefined, // {Date|String} The goal date when use countdown.
   // Event names.
   eventName: {
@@ -23,6 +23,29 @@ let defaultOpion = {
   },
 };
 ```
+
+### getClock
+Return dependency instance of `TimeClock`.
+
+> [TimeClock](time-clock.md).
+
+- Syntax
+```js
+let timeClock = duckTimer.getClock();
+```
+- Return `TimeClock`
+
+### getEventEmitter
+Return dependency instance of `EventEmitter`.
+
+> [EventEmitter3](https://github.com/primus/eventemitter3#readme)   
+[https://nodejs.org/api/events.html](https://nodejs.org/api/events.html)
+
+- Syntax
+```js
+let eventEmitter = duckTimer.getEventEmitter();
+```
+- Return `EventEmitter`
 
 ### onInterval
 Attach callback function on `interval` event.

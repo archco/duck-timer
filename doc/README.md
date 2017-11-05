@@ -2,6 +2,9 @@
 
 ## [DuckTimer](duck-timer.md)
 - [constructor](duck-timer.md#constructor)
+- [getClock](duck-timer.md#getclock): Return dependency instance of `TimeClock`. See [TimeClock](time-clock.md).
+- [getEventEmitter](duck-timer.md#geteventemitter): Return dependency instance of `EventEmitter`. See [EventEmitter3](https://github.com/primus/eventemitter3#readme),
+[https://nodejs.org/api/events.html](https://nodejs.org/api/events.html)
 - [onInterval](duck-timer.md#oninterval): Attach callback function on `interval` event.
 - [setInterval](duck-timer.md#oninterval): Set interval time. and set callback function (optional).
 - [onTimeout](duck-timer.md#ontimeout): Attach callback function on `timeout` event.
