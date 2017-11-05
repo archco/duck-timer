@@ -35,7 +35,7 @@ duckTimer.onInterval(callback);
 - Return `DuckTimer`
 
 ### setInterval
-Set interval time. (optional) and set callback function.
+Set interval time. and set callback function (optional).
 
 - Syntax
 ```js
@@ -56,7 +56,7 @@ duckTimer.onTimeout(callback);
 - Return `DuckTimer`
 
 ### setTimeout
-Set timeout time. (optional) and set callback function.
+Set timeout time. and set callback function (optional).
 
 - Syntax
 ```js

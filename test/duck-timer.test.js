@@ -156,7 +156,7 @@ describe('DuckTimer', () => {
       clock.restore();
     });
 
-    it('works.', () => {
+    it('5 minutes countdown test.', () => {
       let m = 5;
       timer.setCountdown('2017-11-03 00:05:00', '2017-11-03 00:00:00')
         .setInterval(60000, res => {
@@ -164,12 +164,13 @@ describe('DuckTimer', () => {
           expect(res.remain.minutes).to.equal(m);
         }).start();
       clock.tick(300000);
+      expect(m).to.equal(0);
     });
 
     it('When countdown finished, "timeout" event is occured.', () => {
       let occured = false;
       timer.setCountdown('2017-11-03 00:05:00', '2017-11-03 00:00:00')
-        .onTimeout(res => {
+        .onTimeout(() => {
           occured = true;
         }).start();
       clock.tick(300000);
