@@ -11,8 +11,10 @@ let duckTimer = new DuckTimer(option = {});
 let defaultOpion = {
   setTime: 0, // {Number} Set default time (milliseconds)
   tick: 10, // {Number} Time of one ticking.
-  interval: 100, // {Number} Interval time value.
+  interval: undefined, // {Number} Interval time value.
+  timeout: undefined, // {Number} Timeout time value.
   onInterval: undefined, // {function} callback function on interval.
+  onTimeout: undefined, // {function} callback function on timeout.
   countdownDate: undefined, // {Date|String} The goal date when use countdown.
   // Event names.
   eventName: {
@@ -33,7 +35,7 @@ duckTimer.onInterval(callback);
 - Return `DuckTimer`
 
 ### setInterval
-Set interval time.
+Set interval time. (optional) and set callback function.
 
 - Syntax
 ```js
@@ -41,6 +43,27 @@ duckTimer.setInterval(ms, callback = null);
 ```
 - Param `Number` ms - interval time (milliseconds).
 - Param `Function` [callback = null] - callback function on interval event.
+- Return `DuckTimer`
+
+### onTimeout
+Attach callback function on `timeout` event.
+
+- Syntax
+```js
+duckTimer.onTimeout(callback);
+```
+- Param `Function` callback
+- Return `DuckTimer`
+
+### setTimeout
+Set timeout time. (optional) and set callback function.
+
+- Syntax
+```js
+duckTimer.setTimeout(ms, callback = null);
+```
+- Param `Number` ms - timeout time (milliseconds).
+- Param `Function` [callback = null] - callback function on timeout event.
 - Return `DuckTimer`
 
 ### setCountdown

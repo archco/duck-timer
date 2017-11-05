@@ -3,7 +3,9 @@
 ## [DuckTimer](duck-timer.md)
 - [constructor](duck-timer.md#constructor)
 - [onInterval](duck-timer.md#oninterval): Attach callback function on `interval` event.
-- [setInterval](duck-timer.md#oninterval): Set interval time.
+- [setInterval](duck-timer.md#oninterval): Set interval time. and set callback function (optional).
+- [onTimeout](duck-timer.md#ontimeout): Attach callback function on `timeout` event.
+- [setTimeout](duck-timer.md#settimeout): Set timeout time. and set callback function (optional).
 - [setCountdown](duck-timer.md#setcountdown): Set dates for countdown.
 - [start](duck-timer.md#start): Clock start.
 - [stop](duck-timer.md#stop): Clock stop for stopwatch.
