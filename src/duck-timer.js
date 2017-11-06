@@ -91,10 +91,11 @@ export default class DuckTimer {
    * Set dates for countdown.
    *
    * @param {Date|String} date
-   * @param {Date|String} [startDate = 'now']
+   * @param {Date|String} [startDate = null]
    * @return {DuckTimer}
    */
-  setCountdown(date, startDate = 'now') {
+  setCountdown(date, startDate = null) {
+    startDate = startDate === null ? new Date() : startDate;
     this._timeClock.setDistance(startDate, date);
     return this;
   }

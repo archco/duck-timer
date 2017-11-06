@@ -167,6 +167,19 @@ describe('DuckTimer', () => {
       expect(m).to.equal(0);
     });
 
+    it('#setCountdown: second arg is optional.', () => {
+      let m = 5;
+      let date = new Date();
+      date.setMinutes(date.getMinutes() + m);
+      timer.setCountdown(date)
+        .setInterval(60000, res => {
+          m--;
+          expect(res.remain.minutes).to.equal(m);
+        }).start();
+      clock.tick(300000);
+      expect(m).to.equal(0);
+    });
+
     it('When countdown finished, "timeout" event is occured.', () => {
       let occured = false;
       timer.setCountdown('2017-11-03 00:05:00', '2017-11-03 00:00:00')
