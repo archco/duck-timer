@@ -115,6 +115,16 @@ describe('DuckTimer', () => {
       clock.tick(3000);
       expect(occured).to.be.true;
     });
+
+    it('In clock, "timeout" and "remain" properties defined automatically.', () => {
+      let timer = new DuckTimer();
+      let result;
+      timer.setTimeout(3000).start();
+      expect(timer.getClock().timeout).to.be.instanceOf(TimeClock);
+      expect(timer.getClock().remain.time).to.equal(3000);
+      clock.tick(3000);
+      expect(timer.getClock().remain.time).to.equal(0);
+    });
   });
 
   describe('Feature: Stopwatch', () => {

@@ -65,6 +65,7 @@ export default class DuckTimer {
     this.option = Object.assign(this.getDefaultOption(), this.option, option);
     this.time = this.option.setTime;
     this.onInterval(this.option.onInterval);
+    if (this.option.timeout) this.setTimeout(this.option.timeout);
     this.onTimeout(this.option.onTimeout);
     if (this.option.countdownDate) this.setCountdown(this.option.countdownDate);
 
@@ -137,7 +138,7 @@ export default class DuckTimer {
    * @return {DuckTimer}
    */
   setTimeout(ms, callback = null) {
-    this.option.timeout = ms;
+    this._clock.timeout = this.option.timeout = ms;
     this.onTimeout(callback);
     return this;
   }
