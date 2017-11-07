@@ -55,10 +55,21 @@ export default class TimeClock {
       : undefined;
   }
 
+  /**
+   * Return timeout time.
+   *
+   * @return {TimeClock}
+   */
   get timeout() {
     return this._timeout;
   }
 
+  /**
+   * Set timeout as TimeClock.
+   *
+   * @param  {Number} val milliseconds.
+   * @return {void}
+   */
   set timeout(val) {
     this._timeout = new TimeClock(val);
   }
