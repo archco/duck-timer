@@ -73,4 +73,19 @@ describe('TimeClock', () => {
       expect(clock.remain.time).to.be.a('number');
     });
   });
+
+  describe('.timeout', () => {
+    let clock = new TimeClock();
+    clock.timeout = 3000;
+
+    it('Getter and setter will timeout convert to TimeClock.', () => {
+      expect(clock.timeout).to.be.instanceOf(TimeClock);
+      expect(clock.timeout.time).to.equal(3000);
+    });
+
+    it('Getter "remain" will be available.', () => {
+      expect(clock.remain).to.be.instanceOf(TimeClock);
+      expect(clock.remain.time).to.equal(3000);
+    });
+  });
 });

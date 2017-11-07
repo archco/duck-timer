@@ -48,8 +48,19 @@ export default class TimeClock {
    * @return {TimeClock}
    */
   get remain() {
-    if (!this.distance) return undefined;
-    return new TimeClock(this.distance.time - this.time);
+    return this.distance
+      ? new TimeClock(this.distance.time - this.time)
+      : this.timeout
+      ? new TimeClock(this.timeout.time - this.time)
+      : undefined;
+  }
+
+  get timeout() {
+    return this._timeout;
+  }
+
+  set timeout(val) {
+    this._timeout = new TimeClock(val);
   }
 
   /**
