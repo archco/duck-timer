@@ -55,6 +55,7 @@ Attach callback function on `interval` event.
 duckTimer.onInterval(callback);
 ```
 - Param `Function` callback
+  - callbackArg `TimeClock`
 - Return `DuckTimer`
 
 ### setInterval
@@ -66,6 +67,7 @@ duckTimer.setInterval(ms, callback = null);
 ```
 - Param `Number` ms - interval time (milliseconds).
 - Param `Function` [callback = null] - callback function on interval event.
+  - callbackArg `TimeClock`
 - Return `DuckTimer`
 
 ### onTimeout
@@ -76,6 +78,7 @@ Attach callback function on `timeout` event.
 duckTimer.onTimeout(callback);
 ```
 - Param `Function` callback
+  - callbackArg `TimeClock`
 - Return `DuckTimer`
 
 ### setTimeout
@@ -87,6 +90,7 @@ duckTimer.setTimeout(ms, callback = null);
 ```
 - Param `Number` ms - timeout time (milliseconds).
 - Param `Function` [callback = null] - callback function on timeout event.
+  - callbackArg `TimeClock`
 - Return `DuckTimer`
 
 ### setCountdown
@@ -94,10 +98,22 @@ Set dates for countdown.
 
 - Syntax
 ```js
-duckTimer.setCountdown(date, startDate = 'now')
+duckTimer.setCountdown(date, startDate = 'now');
 ```
 - Param `Date|String` date - Set goal date.
 - Param `Date|String` [startDate = 'now'] - Set start date.
+- Return `DuckTimer`
+
+### setDelay
+Set milliseconds delay before start timer.
+
+- Syntax
+```js
+duckTimer.setDelay(ms, callback = null);
+```
+- Param `Number` ms
+- Param `Function` [callback = null] - Invoke callback when delay done.
+  - callbackArg `TimeClock`
 - Return `DuckTimer`
 
 ### start

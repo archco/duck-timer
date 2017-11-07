@@ -10,9 +10,10 @@
 - [onTimeout](duck-timer.md#ontimeout): Attach callback function on `timeout` event.
 - [setTimeout](duck-timer.md#settimeout): Set timeout time. and set callback function (optional).
 - [setCountdown](duck-timer.md#setcountdown): Set dates for countdown.
-- [start](duck-timer.md#start): Clock start.
-- [stop](duck-timer.md#stop): Clock stop for stopwatch.
-- [reset](duck-timer.md#reset): Clock reset for stopwatch.
+- [setDelay](duck-timer.md#setdelay): Set milliseconds delay before start timer.
+- [start](duck-timer.md#start): Timer start.
+- [stop](duck-timer.md#stop): Timer stop.
+- [reset](duck-timer.md#reset): Timer reset.
 
 ## [TimeClock](time-clock.md)
 - [constructor](time-clock.md#constructor)
