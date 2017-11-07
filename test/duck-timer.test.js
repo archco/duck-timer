@@ -173,38 +173,60 @@ describe('DuckTimer', () => {
       clock.restore();
     });
 
-    it('5 minutes countdown test.', () => {
-      let m = 5;
-      timer.setCountdown('2017-11-03 00:05:00', '2017-11-03 00:00:00')
-        .setInterval(60000, res => {
-          m--;
-          expect(res.remain.minutes).to.equal(m);
-        }).start();
-      clock.tick(300000);
-      expect(m).to.equal(0);
+    describe('#setCountdown', () => {
+      it('Second argument is optional.', () => {
+        let m = 5;
+        let date = new Date();
+        date.setMinutes(date.getMinutes() + m);
+        timer.setCountdown(date)
+          .setInterval(60000, res => {
+            m--;
+            expect(res.remain.minutes).to.equal(m);
+          }).start();
+        clock.tick(300000);
+        expect(m).to.equal(0);
+      });
     });
 
-    it('#setCountdown: second arg is optional.', () => {
-      let m = 5;
-      let date = new Date();
-      date.setMinutes(date.getMinutes() + m);
-      timer.setCountdown(date)
-        .setInterval(60000, res => {
-          m--;
-          expect(res.remain.minutes).to.equal(m);
-        }).start();
-      clock.tick(300000);
-      expect(m).to.equal(0);
+    describe('Countdown test.', () => {
+      it('5 minutes countdown test.', () => {
+        let m = 5;
+        timer.setCountdown('2017-11-03 00:05:00', '2017-11-03 00:00:00')
+          .setInterval(60000, res => {
+            m--;
+            expect(res.remain.minutes).to.equal(m);
+          }).start();
+        clock.tick(300000);
+        expect(m).to.equal(0);
+      });
+
+      it('When countdown finished, "timeout" event is occured.', () => {
+        let occured = false;
+        timer.setCountdown('2017-11-03 00:05:00', '2017-11-03 00:00:00')
+          .onTimeout(() => {
+            occured = true;
+          }).start();
+        clock.tick(300000);
+        expect(occured).to.be.true;
+      });
     });
 
-    it('When countdown finished, "timeout" event is occured.', () => {
-      let occured = false;
-      timer.setCountdown('2017-11-03 00:05:00', '2017-11-03 00:00:00')
-        .onTimeout(() => {
-          occured = true;
-        }).start();
-      clock.tick(300000);
-      expect(occured).to.be.true;
+    describe('Auto delay test.', () => {
+      it('Real time = delayed time + time', () => {
+        let interval = 1000;
+        let result;
+        timer.setOption({ enableAutoDelay: true })
+          .setCountdown('2000-01-01 00:05:00', '2000-01-01 00:00:00.250')
+          .setInterval(interval, res => {
+            expect(res.remain.time % interval).to.equal(0);
+          })
+          .onTimeout(res => {
+            result = res;
+          })
+          .start();
+        clock.tick(300000);
+        expect(result.time + result.delayed).to.equal(299750);
+      });
     });
   });
 

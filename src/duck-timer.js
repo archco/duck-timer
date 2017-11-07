@@ -5,11 +5,11 @@ export { TimeClock };
 
 export default class DuckTimer {
   constructor(option = {}) {
-    this._timeClock = new TimeClock();
+    this._clock = new TimeClock();
     this._event = new EventEmitter();
-    this._tickIntevalId = null;
+    this._delay = null;
     this._isPaused = false;
-    this._delay = undefined;
+    this._tickIntevalId = null;
     this.setOption(option);
   }
 
@@ -21,7 +21,7 @@ export default class DuckTimer {
    * @return {Number} milliseconds.
    */
   get time() {
-    return this.getClock().time;
+    return this._clock.time;
   }
 
   /**
@@ -30,7 +30,7 @@ export default class DuckTimer {
    * @param  {Number} val milliseconds.
    */
   set time(val) {
-    this.getClock().time = val;
+    this._clock.time = val;
   }
 
   /**
@@ -77,7 +77,7 @@ export default class DuckTimer {
    * @return {TimeClock}
    */
   getClock() {
-    return this._timeClock;
+    return this._clock;
   }
 
   /**
@@ -98,7 +98,7 @@ export default class DuckTimer {
    */
   setCountdown(date, startDate = null) {
     startDate = startDate === null ? new Date() : startDate;
-    this._timeClock.setDistance(startDate, date);
+    this._clock.setDistance(startDate, date);
     return this;
   }
 
@@ -157,20 +157,29 @@ export default class DuckTimer {
   }
 
   /**
+   * Set milliseconds delay before start timer.
+   *
+   * @param {Number} ms
+   * @param {Function} [callback = null]
+   */
+  setDelay(ms, callback = null) {
+    this._delay = {
+      time: ms,
+      callback: callback,
+    };
+    return this;
+  }
+
+  /**
    * Start clock.
    */
   start() {
     if (this._isPaused) this._isPaused = false;
     if (this._hasTick()) return;
+    this._prepareCountdown();
 
     if (this._delay) {
-      setTimeout(() => {
-        if (typeof this._delay.callback === 'function') {
-          this._delay.callback(this.getClock());
-        }
-
-        this._startTick();
-      }, this._delay.time);
+      setTimeout(this._onDelayTimeout.bind(this), this._delay.time);
     } else {
       this._startTick();
     }
@@ -192,15 +201,6 @@ export default class DuckTimer {
     this.time = 0;
   }
 
-  setDelay(ms, callback = null) {
-    this._delay = {
-      time: ms,
-      callback: callback,
-    };
-    this.getClock().delayed = ms;
-    return this;
-  }
-
   // private
 
   _tickProcess() {
@@ -209,18 +209,18 @@ export default class DuckTimer {
 
     // Interval.
     if (this.time % this.option.interval == 0) {
-      this._event.emit(this.option.eventName.interval, this._timeClock);
+      this._event.emit(this.option.eventName.interval, this._clock);
     }
 
     // Timeout.
     if (this.time >= this.option.timeout) {
-      this._event.emit(this.option.eventName.timeout, this._timeClock);
+      this._event.emit(this.option.eventName.timeout, this._clock);
       this._clearTick();
     }
 
     // Countdown finished.
-    if (this.getClock().remain && this.getClock().remain.time <= 0) {
-      this._event.emit(this.option.eventName.timeout, this._timeClock);
+    if (this._clock.remain && this._clock.remain.time <= 0) {
+      this._event.emit(this.option.eventName.timeout, this._clock);
       this._clearTick();
     }
   }
@@ -239,5 +239,26 @@ export default class DuckTimer {
 
   _hasTick() {
     return this._tickIntevalId != null;
+  }
+
+  _onDelayTimeout() {
+    this._clock.delayed = this._delay.time;
+    if (typeof this._delay.callback === 'function') {
+      this._delay.callback(this._clock);
+    }
+
+    this._startTick();
+  }
+
+  _prepareCountdown() {
+    if (!this._clock.distance) return;
+    let remaindler = this._clock.distance.time % this.option.interval || 0;
+
+    if (remaindler > 0 && this.option.enableAutoDelay) {
+      let c = this._clock;
+      c.startDate.setTime(c.startDate.getTime() + remaindler);
+      c.setDistance(c.startDate, c.endDate);
+      this.setDelay(remaindler);
+    }
   }
 }
