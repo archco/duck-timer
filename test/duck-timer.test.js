@@ -42,6 +42,23 @@ describe('DuckTimer', () => {
     });
   });
 
+  describe('#getClock', () => {
+    it('Return instance of TimeClock.', () => {
+      let timer = new DuckTimer({ setTime: 3000 });
+      expect(timer.getClock()).to.be.instanceOf(TimeClock);
+      expect(timer.getClock().seconds).to.equal(3);
+    });
+  });
+
+  describe('#getEventEmitter', () => {
+    it('Return instance of eventemitter3', () => {
+      let timer = new DuckTimer();
+      timer.setInterval(1000, res => console.log(res));
+      expect(timer.getEventEmitter()).to.be.an('object');
+      expect(timer.getEventEmitter().listeners('interval')).is.not.empty;
+    });
+  });
+
   describe('Feature: Interval callback', () => {
     let clock;
 
@@ -191,20 +208,49 @@ describe('DuckTimer', () => {
     });
   });
 
-  describe('#getClock', () => {
-    it('Return instance of TimeClock.', () => {
-      let timer = new DuckTimer({ setTime: 3000 });
-      expect(timer.getClock()).to.be.instanceOf(TimeClock);
-      expect(timer.getClock().seconds).to.equal(3);
-    });
-  });
+  describe('Feature: delay', () => {
+    let clock;
+    let timer;
 
-  describe('#getEventEmitter', () => {
-    it('Return instance of eventemitter3', () => {
-      let timer = new DuckTimer();
-      timer.setInterval(1000, res => console.log(res));
-      expect(timer.getEventEmitter()).to.be.an('object');
-      expect(timer.getEventEmitter().listeners('interval')).is.not.empty;
+    beforeEach(() => {
+      clock = sinon.useFakeTimers();
+      timer = new DuckTimer();
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
+    it('optionable: enableAutoDelay (default = true)', () => {
+      expect(timer.option.enableAutoDelay).to.be.true;
+      timer.setOption({ enableAutoDelay: false });
+      expect(timer.option.enableAutoDelay).to.be.false;
+    });
+
+    describe('#setDelay', () => {
+      it('First argument is delay time.', () => {
+        let time;
+        let delayed;
+        timer.setTimeout(1000, res => {
+          time = res.time;
+          delayed = res.delayed;
+        }).setDelay(1000).start();
+        clock.tick(3000);
+        expect(time).to.equal(1000);
+        expect(delayed).to.equal(1000);
+      });
+
+      it('Second argument is callback when delay done. (optional)', () => {
+        let time;
+        let delayed;
+        timer.setTimeout(1000).setDelay(1000, res => {
+          time = res.time;
+          delayed = res.delayed;
+        }).start();
+        clock.tick(2000);
+        expect(time).to.equal(0);
+        expect(delayed).to.equal(1000);
+      });
     });
   });
 });

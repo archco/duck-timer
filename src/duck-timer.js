@@ -9,6 +9,7 @@ export default class DuckTimer {
     this._event = new EventEmitter();
     this._tickIntevalId = null;
     this._isPaused = false;
+    this._delay = undefined;
     this.setOption(option);
   }
 
@@ -46,6 +47,7 @@ export default class DuckTimer {
       onInterval: undefined,
       onTimeout: undefined,
       countdownDate: undefined,
+      enableAutoDelay: true,
       eventName: {
         interval: 'interval',
         timeout: 'timeout',
@@ -159,12 +161,18 @@ export default class DuckTimer {
    */
   start() {
     if (this._isPaused) this._isPaused = false;
+    if (this._hasTick()) return;
 
-    if (!this._hasTick()) {
-      this._tickIntevalId = setInterval(
-        this._tickProcess.bind(this),
-        this.option.tick
-      );
+    if (this._delay) {
+      setTimeout(() => {
+        if (typeof this._delay.callback === 'function') {
+          this._delay.callback(this.getClock());
+        }
+
+        this._startTick();
+      }, this._delay.time);
+    } else {
+      this._startTick();
     }
   }
 
@@ -182,6 +190,15 @@ export default class DuckTimer {
     this._clearTick();
     this._isPaused = false;
     this.time = 0;
+  }
+
+  setDelay(ms, callback = null) {
+    this._delay = {
+      time: ms,
+      callback: callback,
+    };
+    this.getClock().delayed = ms;
+    return this;
   }
 
   // private
@@ -206,6 +223,13 @@ export default class DuckTimer {
       this._event.emit(this.option.eventName.timeout, this._timeClock);
       this._clearTick();
     }
+  }
+
+  _startTick() {
+    this._tickIntevalId = setInterval(
+      this._tickProcess.bind(this),
+      this.option.tick
+    );
   }
 
   _clearTick() {
