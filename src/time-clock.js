@@ -75,7 +75,7 @@ export default class TimeClock {
   }
 
   /**
-   * Set startDate, endDate and distnace.
+   * Set startDate, endDate and distance.
    *
    * @param {Date|String} start
    * @param {Date|String} end

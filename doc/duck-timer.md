@@ -8,7 +8,7 @@ let duckTimer = new DuckTimer(option = {});
 - Param `Object` [option = {}]
 - options
 ```js
-let defaultOpion = {
+let defaultOption = {
   setTime: 0,               // {Number} Set default time (milliseconds)
   tick: 10,                 // {Number} Time of one ticking.
   interval: undefined,      // {Number} Interval time value.

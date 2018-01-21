@@ -38,7 +38,7 @@ let remainTimeClock = timeClock.remain;
 ```
 
 ### setDistance
-Set startDate, endDate and distnace.
+Set startDate, endDate and distance.
 
 - Syntax
 ```js

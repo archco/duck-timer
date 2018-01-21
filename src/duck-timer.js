@@ -9,7 +9,7 @@ export default class DuckTimer {
     this._event = new EventEmitter();
     this._delay = null;
     this._isPaused = false;
-    this._tickIntevalId = null;
+    this._tickIntervalId = null;
     this.setOption(option);
   }
 
@@ -227,19 +227,19 @@ export default class DuckTimer {
   }
 
   _startTick() {
-    this._tickIntevalId = setInterval(
+    this._tickIntervalId = setInterval(
       this._tickProcess.bind(this),
       this.option.tick
     );
   }
 
   _clearTick() {
-    clearInterval(this._tickIntevalId);
-    this._tickIntevalId = null;
+    clearInterval(this._tickIntervalId);
+    this._tickIntervalId = null;
   }
 
   _hasTick() {
-    return this._tickIntevalId != null;
+    return this._tickIntervalId != null;
   }
 
   _onDelayTimeout() {
@@ -253,13 +253,13 @@ export default class DuckTimer {
 
   _prepareCountdown() {
     if (!this._clock.distance) return;
-    let remaindler = this._clock.distance.time % this.option.interval || 0;
+    let remainder = this._clock.distance.time % this.option.interval || 0;
 
-    if (remaindler > 0 && this.option.enableAutoDelay) {
+    if (remainder > 0 && this.option.enableAutoDelay) {
       let c = this._clock;
-      c.startDate.setTime(c.startDate.getTime() + remaindler);
+      c.startDate.setTime(c.startDate.getTime() + remainder);
       c.setDistance(c.startDate, c.endDate);
-      this.setDelay(remaindler);
+      this.setDelay(remainder);
     }
   }
 }
