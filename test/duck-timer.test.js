@@ -1,6 +1,6 @@
 describe('DuckTimer', () => {
   describe('constructor', () => {
-    it('constructible.', () => {
+    it('can constructed.', () => {
       let timer = new DuckTimer();
       expect(timer).to.be.instanceOf(DuckTimer);
     });
@@ -19,8 +19,10 @@ describe('DuckTimer', () => {
 
     it('onInterval: callback function.', () => {
       let timer = new DuckTimer({ onInterval: res => console.log(res) });
+      let listeners = timer.getEventEmitter().listeners('interval');
+
       expect(timer.option.onInterval).to.be.a('function');
-      expect(timer.getEventEmitter().listeners('interval', true)).to.be.true;
+      expect(listeners.length).to.equal(1);
     });
 
     it('timeout: Set timeout time(milliseconds).', () => {
@@ -30,8 +32,9 @@ describe('DuckTimer', () => {
 
     it('onTimeout: callback function that invoke when timeout done or countdown finished.', () => {
       let timer = new DuckTimer({ onTimeout: res => console.log(res) });
+      let listeners = timer.getEventEmitter().listeners('timeout');
       expect(timer.option.onTimeout).to.be.a('function');
-      expect(timer.getEventEmitter().listeners('timeout', true)).to.be.true;
+      expect(listeners.length).to.equal(1);
     });
 
     it('countdownDate: set endDate value to "timeClock"', () => {
@@ -99,21 +102,21 @@ describe('DuckTimer', () => {
       clock.restore();
     });
 
-    it('If timeout time is come, then "timeout" event is occured.', () => {
+    it('If timeout time is come, then "timeout" event will occur.', () => {
       let timer = new DuckTimer({ timeout: 3000 });
-      let occured = false;
+      let occurred = false;
       timer.onTimeout(res => {
         expect(res).to.be.instanceOf(TimeClock);
-        occured = true;
+        occurred = true;
       }).start();
       clock.tick(3000);
-      expect(occured).to.be.true;
+      expect(occurred).to.be.true;
 
       // again.
-      occured = false;
+      occurred = false;
       timer.start();
       clock.tick(3000);
-      expect(occured).to.be.true;
+      expect(occurred).to.be.true;
     });
 
     it('In clock, "timeout" and "remain" properties defined automatically.', () => {
@@ -210,14 +213,14 @@ describe('DuckTimer', () => {
         expect(m).to.equal(0);
       });
 
-      it('When countdown finished, "timeout" event is occured.', () => {
-        let occured = false;
+      it('When countdown finished, "timeout" event is occurred.', () => {
+        let occurred = false;
         timer.setCountdown('2017-11-03 00:05:00', '2017-11-03 00:00:00')
           .onTimeout(() => {
-            occured = true;
+            occurred = true;
           }).start();
         clock.tick(300000);
-        expect(occured).to.be.true;
+        expect(occurred).to.be.true;
       });
     });
 
@@ -253,7 +256,7 @@ describe('DuckTimer', () => {
       clock.restore();
     });
 
-    it('optionable: enableAutoDelay (default = true)', () => {
+    it('can set option: enableAutoDelay (default = true)', () => {
       expect(timer.option.enableAutoDelay).to.be.true;
       timer.setOption({ enableAutoDelay: false });
       expect(timer.option.enableAutoDelay).to.be.false;
