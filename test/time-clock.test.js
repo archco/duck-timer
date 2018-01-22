@@ -76,7 +76,7 @@ describe('TimeClock', () => {
 
   describe('.timeout', () => {
     let clock = new TimeClock();
-    clock.timeout = 3000;
+    clock.setTimeout(3000);
 
     it('Getter and setter will timeout convert to TimeClock.', () => {
       expect(clock.timeout).to.be.instanceOf(TimeClock);

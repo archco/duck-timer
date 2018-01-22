@@ -25,7 +25,7 @@ interface Option {
 
 interface Delay {
   time: number;
-  callback: ((clock: TimeClock, delayed: number) => void|undefined);
+  callback: CallbackOrUndefined;
 }
 
 export default class DuckTimer {
@@ -90,7 +90,7 @@ export default class DuckTimer {
     return this.event;
   }
 
-  public setCountdown(date: Date|string, startDate: Date|string = new Date()): this {
+  public setCountdown(date: (Date|string), startDate: (Date|string) = new Date()): this {
     this.clock.setDistance(startDate, date);
     return this;
   }
@@ -197,8 +197,9 @@ export default class DuckTimer {
   }
 
   private onDelayTimeout(): void {
+    this.clock.delayed = this.delay.time;
     if (typeof this.delay.callback === 'function') {
-      this.delay.callback(this.clock, this.delay.time);
+      this.delay.callback(this.clock);
     }
     this.startTick();
   }

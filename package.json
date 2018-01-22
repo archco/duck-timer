@@ -32,7 +32,6 @@
     "lodash-es": "^4.17.4"
   },
   "devDependencies": {
-    "@types/eventemitter3": "^2.0.2",
     "@types/lodash-es": "^4.17.0",
     "awesome-typescript-loader": "^3.4.1",
     "babel-core": "^6.26.0",

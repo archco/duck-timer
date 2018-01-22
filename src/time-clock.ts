@@ -10,29 +10,30 @@ export interface ClockData {
 
 export default class TimeClock {
   public time: number;
-  public startDate: (Date|null) = null;
-  public endDate: (Date|null) = null;
-  public distance: (TimeClock|null) = null;
-  public timeout: (TimeClock|null) = null;
+  public startDate: Date|null = null;
+  public endDate: Date|null = null;
+  public distance: TimeClock|null = null;
+  public timeout: TimeClock|null = null;
+  public delayed: number|undefined = undefined;
 
   constructor(ms: number = 0) {
     this.time = ms;
   }
 
   get seconds(): number {
-    return this.time / 1000;
+    return Math.floor(this.time / 1000);
   }
 
   get minutes(): number {
-    return this.time / (1000 * 60);
+    return Math.floor(this.time / (1000 * 60));
   }
 
   get hours(): number {
-    return this.time / (1000 * 60 * 60);
+    return Math.floor(this.time / (1000 * 60 * 60));
   }
 
   get days(): number {
-    return this.time / (1000 * 60 * 60 * 24);
+    return Math.floor(this.time / (1000 * 60 * 60 * 24));
   }
 
   get remain(): (TimeClock|null) {
