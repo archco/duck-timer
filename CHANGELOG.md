@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.4.0] - 2018-01-23
+
 ### Changed
 
-- Migration to typescript.
+- Migration to typescript: See typescript declaration files -  [duck-timer.d.ts](https://github.com/archco/duck-timer/blob/master/src/duck-timer.d.ts) and [time-clock.d.ts](https://github.com/archco/duck-timer/blob/master/src/time-clock.d.ts).
 
 ## [0.3.0] - 2017-11-07
 
@@ -32,7 +34,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 First Release.
 
-[Unreleased]: https://github.com/archco/duck-timer/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/archco/duck-timer/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/archco/duck-timer/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/archco/duck-timer/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/archco/duck-timer/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/archco/duck-timer/compare/3aab7e6...v0.1.0

@@ -1,5 +1,6 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
   entry: {
@@ -28,7 +29,12 @@ module.exports = {
     new UglifyJsPlugin({
       sourceMap: false,
       include: /\.min\.js$/
-    })
+    }),
+    new WebpackNotifierPlugin({
+      title: 'Webpack',
+      alwaysNotify: true,
+      sound: false,
+    }),
   ],
   devtool: 'source-map',
 };
