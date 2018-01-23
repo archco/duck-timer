@@ -29,7 +29,7 @@ interface Delay {
   callback: CallbackFn|undefined;
 }
 
-declare class DuckTimer {
+export default class DuckTimer {
   constructor(option?: object);
 
   clock: TimeClock;
