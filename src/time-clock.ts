@@ -1,4 +1,4 @@
-import padStart from 'lodash-es/padstart';
+import padStart from 'lodash-es/padStart';
 
 export interface ClockData {
   day: number;

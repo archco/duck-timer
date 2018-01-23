@@ -1,5 +1,5 @@
 import { EventEmitter } from 'eventemitter3';
-import assignIn from 'lodash-es/assignin';
+import assignIn from 'lodash-es/assignIn';
 import TimeClock from './time-clock';
 
 export { TimeClock };

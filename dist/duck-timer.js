@@ -729,7 +729,7 @@ function stringSize(string) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_eventemitter3__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_eventemitter3___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_eventemitter3__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_assignin__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_es_assignIn__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__time_clock__ = __webpack_require__(57);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "TimeClock", function() { return __WEBPACK_IMPORTED_MODULE_2__time_clock__["a"]; });
 
@@ -775,7 +775,7 @@ var DuckTimer = /** @class */ (function () {
     };
     DuckTimer.prototype.setOption = function (option) {
         if (option === void 0) { option = {}; }
-        this.option = Object(__WEBPACK_IMPORTED_MODULE_1_lodash_es_assignin__["a" /* default */])(this.option, option);
+        this.option = Object(__WEBPACK_IMPORTED_MODULE_1_lodash_es_assignIn__["a" /* default */])(this.option, option);
         this.time = this.option.setTime;
         this.onInterval(this.option.onInterval);
         if (this.option.timeout) {
@@ -2528,7 +2528,7 @@ function nativeKeysIn(object) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_padstart__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_padStart__ = __webpack_require__(58);
 
 var TimeClock = /** @class */ (function () {
     function TimeClock(ms) {
@@ -2601,7 +2601,7 @@ var TimeClock = /** @class */ (function () {
     };
     TimeClock.prototype.toTimeString = function () {
         var t = this.toData();
-        var refine = function (num) { return Object(__WEBPACK_IMPORTED_MODULE_0_lodash_es_padstart__["a" /* default */])(num.toString(), 2, '0'); };
+        var refine = function (num) { return Object(__WEBPACK_IMPORTED_MODULE_0_lodash_es_padStart__["a" /* default */])(num.toString(), 2, '0'); };
         var str = '';
         if (t.day > 0) {
             str += t.day + "d";
