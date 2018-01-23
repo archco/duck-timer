@@ -1,27 +1,25 @@
 import { EventEmitter } from 'eventemitter3';
 import TimeClock from './time-clock';
 
-export as namespace DuckTimer;
-
 export { TimeClock };
 
 type CallbackFn = (clock: TimeClock) => void;
 
-interface EventName {
+interface EventNames {
   interval: string;
   timeout: string;
 }
 
-interface Option {
-  setTime: number;
-  tick: number;
-  interval: number|undefined;
-  timeout: number|undefined;
-  onInterval: CallbackFn|undefined;
-  onTimeout: CallbackFn|undefined;
-  countdownDate: Date|undefined;
-  eventName: EventName;
-  enableAutoDelay: boolean;
+interface Options {
+  setTime?: number;
+  tick?: number;
+  interval?: number;
+  timeout?: number;
+  onInterval?: CallbackFn;
+  onTimeout?: CallbackFn;
+  countdownDate?: Date;
+  eventName?: EventNames;
+  enableAutoDelay?: boolean;
 }
 
 interface Delay {
@@ -30,17 +28,17 @@ interface Delay {
 }
 
 export default class DuckTimer {
-  constructor(option?: object);
-
   clock: TimeClock;
   event: EventEmitter;
-  option: Option;
+  option: Options;
   delay: Delay|null;
   isPaused: boolean;
   time: number;
 
-  getDefaultOption(): Option;
-  setOption(option?: object): this;
+  constructor(option?: Options);
+
+  getDefaultOption(): Options;
+  setOption(option?: Options): this;
   getClock(): TimeClock;
   getEventEmitter(): EventEmitter;
   setCountdown(date: Date|string, startDate?: Date|string): this;

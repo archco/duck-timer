@@ -9,12 +9,12 @@ export interface ClockData {
 }
 
 export default class TimeClock {
-  public time: number;
-  public startDate: Date|null = null;
-  public endDate: Date|null = null;
-  public distance: TimeClock|null = null;
-  public timeout: TimeClock|null = null;
-  public delayed: number|undefined = undefined;
+  time: number;
+  startDate: Date|null = null;
+  endDate: Date|null = null;
+  distance: TimeClock|null = null;
+  timeout: TimeClock|null = null;
+  delayed: number|undefined = undefined;
 
   constructor(ms: number = 0) {
     this.time = ms;
@@ -44,12 +44,12 @@ export default class TimeClock {
       : null;
   }
 
-  public setTimeout(ms: number): this {
+  setTimeout(ms: number): this {
     this.timeout = new TimeClock(ms);
     return this;
   }
 
-  public setDistance(start: Date|string, end: Date|string): this {
+  setDistance(start: Date|string, end: Date|string): this {
     this.startDate = start instanceof Date ? start : new Date(start);
     this.endDate = end instanceof Date ? end : new Date(end);
 
@@ -59,7 +59,7 @@ export default class TimeClock {
     return this;
   }
 
-  public toData(): ClockData {
+  toData(): ClockData {
     const t = this.time;
     return {
       day: Math.floor(t / (1000 * 60 * 60 * 24)),
@@ -70,7 +70,7 @@ export default class TimeClock {
     };
   }
 
-  public toTimeString(): string {
+  toTimeString(): string {
     const t = this.toData();
     const refine = (num: number) => padStart(num.toString(), 2, '0');
     let str = '';

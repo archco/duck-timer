@@ -1,5 +1,3 @@
-export as namespace DuckTimer;
-
 export interface ClockData {
   day: number;
   hour: number;
@@ -8,9 +6,7 @@ export interface ClockData {
   ms: number;
 }
 
-declare class TimeClock {
-  constructor(ms?: number);
-
+export default class TimeClock {
   time: number;
   startDate: Date|null;
   endDate: Date|null;
@@ -22,6 +18,8 @@ declare class TimeClock {
   readonly hours: number;
   readonly days: number;
   readonly remain: TimeClock|null;
+
+  constructor(ms?: number);
 
   setTimeout(ms: number): this;
   setDistance(start: Date|string, end: Date|string): this;

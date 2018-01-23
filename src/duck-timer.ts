@@ -6,21 +6,21 @@ export { TimeClock };
 
 type CallbackFn = (clock: TimeClock) => void;
 
-interface EventName {
+interface EventNames {
   interval: string;
   timeout: string;
 }
 
-interface Option {
-  setTime: number;
-  tick: number;
-  interval: number|undefined;
-  timeout: number|undefined;
-  onInterval: CallbackFn|undefined;
-  onTimeout: CallbackFn|undefined;
-  countdownDate: Date|undefined;
-  eventName: EventName;
-  enableAutoDelay: boolean;
+interface Options {
+  setTime?: number;
+  tick?: number;
+  interval?: number;
+  timeout?: number;
+  onInterval?: CallbackFn;
+  onTimeout?: CallbackFn;
+  countdownDate?: Date;
+  eventName?: EventNames;
+  enableAutoDelay?: boolean;
 }
 
 interface Delay {
@@ -29,14 +29,14 @@ interface Delay {
 }
 
 export default class DuckTimer {
-  public clock: TimeClock;
-  public event: EventEmitter;
-  public option: Option;
-  public delay: Delay|null = null;
-  public isPaused: boolean = false;
+  clock: TimeClock;
+  event: EventEmitter;
+  option: Options;
+  delay: Delay|null = null;
+  isPaused: boolean = false;
   private tickIntervalId: number|null = null;
 
-  constructor(option: Partial<Option> = {}) {
+  constructor(option: Options = {}) {
     this.clock = new TimeClock();
     this.event = new EventEmitter();
     this.option = this.getDefaultOption();
@@ -51,7 +51,7 @@ export default class DuckTimer {
     this.clock.time = ms;
   }
 
-  public getDefaultOption(): Option {
+  getDefaultOption(): Options {
     return {
       setTime: 0,
       tick: 10,
@@ -68,7 +68,7 @@ export default class DuckTimer {
     };
   }
 
-  public setOption(option: Partial<Option> = {}): this {
+  setOption(option: Options = {}): this {
     this.option = assignIn(this.option, option);
     this.time = this.option.setTime;
     this.onInterval(this.option.onInterval);
@@ -82,45 +82,45 @@ export default class DuckTimer {
     return this;
   }
 
-  public getClock(): TimeClock {
+  getClock(): TimeClock {
     return this.clock;
   }
 
-  public getEventEmitter(): EventEmitter {
+  getEventEmitter(): EventEmitter {
     return this.event;
   }
 
-  public setCountdown(date: Date|string, startDate: Date|string = new Date()): this {
+  setCountdown(date: Date|string, startDate: Date|string = new Date()): this {
     this.clock.setDistance(startDate, date);
     return this;
   }
 
-  public setInterval(ms: number, callback: CallbackFn|null = null): this {
+  setInterval(ms: number, callback: CallbackFn|null = null): this {
     this.option.interval = ms;
     return this.onInterval(callback);
   }
 
-  public onInterval(callback: CallbackFn|null): this {
+  onInterval(callback: CallbackFn|null): this {
     if (typeof callback === 'function') {
       this.event.on(this.option.eventName.interval, callback);
     }
     return this;
   }
 
-  public setTimeout(ms: number, callback: CallbackFn|null = null): this {
+  setTimeout(ms: number, callback: CallbackFn|null = null): this {
     this.option.timeout = ms;
     this.clock.setTimeout(this.option.timeout);
     return this.onTimeout(callback);
   }
 
-  public onTimeout(callback: CallbackFn|null): this {
+  onTimeout(callback: CallbackFn|null): this {
     if (typeof callback === 'function') {
       this.event.on(this.option.eventName.timeout, callback);
     }
     return this;
   }
 
-  public setDelay(ms: number, cb: CallbackFn|null = null): this {
+  setDelay(ms: number, cb: CallbackFn|null = null): this {
     this.delay = {
       time: ms,
       callback: cb,
@@ -128,7 +128,7 @@ export default class DuckTimer {
     return this;
   }
 
-  public start(): void {
+  start(): void {
     if (this.isPaused) {
       this.isPaused = false;
     }
@@ -144,11 +144,11 @@ export default class DuckTimer {
     }
   }
 
-  public stop(): void {
+  stop(): void {
     this.isPaused = true;
   }
 
-  public reset(): void {
+  reset(): void {
     this.clearTick();
     this.isPaused = false;
     this.time = 0;
