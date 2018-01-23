@@ -1,56 +1,34 @@
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-const jsRule = {
-  test: /\.js$/,
-  exclude: /(node_modules|bower_components)/,
-  use: {
-    loader: 'babel-loader',
-    options: {
-      presets: ['env'],
-    },
+module.exports = {
+  entry: {
+    'duck-timer': './src/duck-timer.ts',
+    'duck-timer.min': './src/duck-timer.ts',
   },
-};
-
-const lib = {
-  entry: './src/duck-timer.js',
   output: {
-    path: path.resolve(__dirname, 'lib'),
-    filename: 'duck-timer.js',
-    library: 'DuckTimer',
-    libraryTarget: 'window',
-  },
-  module: {
-    rules: [jsRule],
-  },
-  devtool: 'source-map',
-};
-
-const min = {
-  entry: './src/duck-timer.js',
-  output: {
-    path: path.resolve(__dirname, 'lib'),
-    filename: 'duck-timer.min.js',
-    library: 'DuckTimer',
-    libraryTarget: 'window',
-  },
-  module: {
-    rules: [jsRule],
-  },
-  plugins: [new UglifyJsPlugin()],
-};
-
-const mod = {
-  entry: './src/duck-timer.js',
-  output: {
-    path: path.resolve(__dirname, 'lib'),
-    filename: 'duck-timer.mod.js',
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
     library: 'DuckTimer',
     libraryTarget: 'umd',
   },
   module: {
-    rules: [jsRule],
+    rules: [
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: 'awesome-typescript-loader',
+      },
+    ],
   },
+  resolve: {
+    extensions: ['.js', '.ts'],
+  },
+  plugins: [
+    new UglifyJsPlugin({
+      sourceMap: false,
+      include: /\.min\.js$/
+    })
+  ],
+  devtool: 'source-map',
 };
-
-module.exports = [lib, min, mod];

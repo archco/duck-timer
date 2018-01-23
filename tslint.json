@@ -1,0 +1,8 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "quotemark": [true, "single", "avoid-escape", "avoid-template"],
+    "interface-name": [true, "never-prefix"],
+    "object-literal-sort-keys": [true, "ignore-case", "match-declaration-order", "shorthand-first"]
+  }
+}
