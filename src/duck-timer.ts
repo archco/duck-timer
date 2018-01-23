@@ -4,7 +4,7 @@ import TimeClock from './time-clock';
 
 export { TimeClock };
 
-type CallbackOrUndefined = ((clock: TimeClock) => void|undefined);
+type CallbackFn = (clock: TimeClock) => void;
 
 interface EventName {
   interval: string;
@@ -16,8 +16,8 @@ interface Option {
   tick: number;
   interval: number|undefined;
   timeout: number|undefined;
-  onInterval: CallbackOrUndefined;
-  onTimeout: CallbackOrUndefined;
+  onInterval: CallbackFn|undefined;
+  onTimeout: CallbackFn|undefined;
   countdownDate: Date|undefined;
   eventName: EventName;
   enableAutoDelay: boolean;
@@ -25,7 +25,7 @@ interface Option {
 
 interface Delay {
   time: number;
-  callback: CallbackOrUndefined;
+  callback: CallbackFn|undefined;
 }
 
 export default class DuckTimer {
@@ -90,37 +90,37 @@ export default class DuckTimer {
     return this.event;
   }
 
-  public setCountdown(date: (Date|string), startDate: (Date|string) = new Date()): this {
+  public setCountdown(date: Date|string, startDate: Date|string = new Date()): this {
     this.clock.setDistance(startDate, date);
     return this;
   }
 
-  public setInterval(ms: number, callback: CallbackOrUndefined = null): this {
+  public setInterval(ms: number, callback: CallbackFn|null = null): this {
     this.option.interval = ms;
     return this.onInterval(callback);
   }
 
-  public onInterval(callback: CallbackOrUndefined): this {
+  public onInterval(callback: CallbackFn|null): this {
     if (typeof callback === 'function') {
       this.event.on(this.option.eventName.interval, callback);
     }
     return this;
   }
 
-  public setTimeout(ms: number, callback: CallbackOrUndefined = null): this {
+  public setTimeout(ms: number, callback: CallbackFn|null = null): this {
     this.option.timeout = ms;
     this.clock.setTimeout(this.option.timeout);
     return this.onTimeout(callback);
   }
 
-  public onTimeout(callback: CallbackOrUndefined): this {
+  public onTimeout(callback: CallbackFn|null): this {
     if (typeof callback === 'function') {
       this.event.on(this.option.eventName.timeout, callback);
     }
     return this;
   }
 
-  public setDelay(ms: number, cb: CallbackOrUndefined = null): this {
+  public setDelay(ms: number, cb: CallbackFn|null = null): this {
     this.delay = {
       time: ms,
       callback: cb,

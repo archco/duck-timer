@@ -36,7 +36,7 @@ export default class TimeClock {
     return Math.floor(this.time / (1000 * 60 * 60 * 24));
   }
 
-  get remain(): (TimeClock|null) {
+  get remain(): TimeClock|null {
     return this.distance
       ? new TimeClock(this.distance.time - this.time)
       : this.timeout
@@ -49,7 +49,7 @@ export default class TimeClock {
     return this;
   }
 
-  public setDistance(start: (Date|string), end: (Date|string)): this {
+  public setDistance(start: Date|string, end: Date|string): this {
     this.startDate = start instanceof Date ? start : new Date(start);
     this.endDate = end instanceof Date ? end : new Date(end);
 
