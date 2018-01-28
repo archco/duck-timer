@@ -20,6 +20,11 @@ module.exports = {
         exclude: /node_modules/,
         use: 'awesome-typescript-loader',
       },
+      {
+        test: /\.js$/,
+        use: 'source-map-loader',
+        enforce: 'pre',
+      },
     ],
   },
   resolve: {
@@ -28,7 +33,7 @@ module.exports = {
   plugins: [
     new UglifyJsPlugin({
       sourceMap: false,
-      include: /\.min\.js$/
+      include: /\.min\.js$/,
     }),
     new WebpackNotifierPlugin({
       title: 'Webpack',

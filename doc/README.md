@@ -30,4 +30,4 @@
   - [remain](time-clock.md#remain): Returns `TimeClock` that remains until endDate.
 - [setDistance](time-clock.md#setdistance): Set `startDate`, `endDate` and `distance`.
 - [toData](time-clock.md#todata): Return time to data object.
-- [toTimeString](time-clock#totimestring): Return time to string.
+- [toTimeString](time-clock.md#totimestring): Return time to string.

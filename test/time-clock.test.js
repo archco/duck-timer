@@ -63,7 +63,7 @@ describe('TimeClock', function () {
       expect(clock.endDate).to.instanceOf(Date);
     });
 
-    it('distance will returns time between startDate and endDate as instance of TimeClock.', function () {
+    it('distance will returns time between startDate and endDate as instance of TimeClock.', function () { // jscs:ignore maximumLineLength
       expect(clock.distance).to.instanceOf(TimeClock);
       expect(clock.distance.time).to.be.a('number');
     });

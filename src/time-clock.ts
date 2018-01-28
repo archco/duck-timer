@@ -16,26 +16,50 @@ export default class TimeClock {
   timeout: TimeClock|null = null;
   delayed: number|undefined = undefined;
 
+  /**
+   * constructor
+   * @param ms milliseconds
+   */
   constructor(ms: number = 0) {
     this.time = ms;
   }
 
+  /**
+   * get time as seconds.
+   * @return
+   */
   get seconds(): number {
     return Math.floor(this.time / 1000);
   }
 
+  /**
+   * get time as minutes.
+   * @return
+   */
   get minutes(): number {
     return Math.floor(this.time / (1000 * 60));
   }
 
+  /**
+   * get time as hours.
+   * @return
+   */
   get hours(): number {
     return Math.floor(this.time / (1000 * 60 * 60));
   }
 
+  /**
+   * get time as days
+   * @return
+   */
   get days(): number {
     return Math.floor(this.time / (1000 * 60 * 60 * 24));
   }
 
+  /**
+   * get remain clock when it exists.
+   * @return
+   */
   get remain(): TimeClock|null {
     return this.distance
       ? new TimeClock(this.distance.time - this.time)
@@ -44,11 +68,22 @@ export default class TimeClock {
       : null;
   }
 
+  /**
+   * set timeout.
+   * @param  ms milliseconds
+   * @return
+   */
   setTimeout(ms: number): this {
     this.timeout = new TimeClock(ms);
     return this;
   }
 
+  /**
+   * Set startDate and endDate.
+   * @param  start
+   * @param  end
+   * @return
+   */
   setDistance(start: Date|string, end: Date|string): this {
     this.startDate = start instanceof Date ? start : new Date(start);
     this.endDate = end instanceof Date ? end : new Date(end);
@@ -59,6 +94,10 @@ export default class TimeClock {
     return this;
   }
 
+  /**
+   * Returns time as data object.
+   * @return
+   */
   toData(): ClockData {
     const t = this.time;
     return {
@@ -70,6 +109,10 @@ export default class TimeClock {
     };
   }
 
+  /**
+   * Returns time as string. e.g. '2d 05h 33m 21s 420ms'
+   * @return
+   */
   toTimeString(): string {
     const t = this.toData();
     const refine = (num: number) => padStart(num.toString(), 2, '0');

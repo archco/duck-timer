@@ -21,7 +21,7 @@ describe('DuckTimer', function () {
       var timer = new DuckTimer({
         onInterval: function (res) {
           console.log(res);
-        }
+        },
       });
       var listeners = timer.getEventEmitter().listeners('interval');
 
@@ -34,11 +34,11 @@ describe('DuckTimer', function () {
       expect(timer.option.timeout).to.equal(1000);
     });
 
-    it('onTimeout: callback function that invoke when timeout done or countdown finished.', function () {
+    it('onTimeout: set callback when occur "timeout" event.', function () {
       var timer = new DuckTimer({
         onTimeout: function (res) {
           console.log(res);
-        }
+        },
       });
       var listeners = timer.getEventEmitter().listeners('timeout');
       expect(timer.option.onTimeout).to.be.a('function');
@@ -67,6 +67,7 @@ describe('DuckTimer', function () {
       timer.setInterval(1000, function (res) {
         console.log(res);
       });
+
       expect(timer.getEventEmitter()).to.be.an('object');
       expect(timer.getEventEmitter().listeners('interval')).is.not.empty;
     });
