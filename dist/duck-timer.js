@@ -737,6 +737,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 var DuckTimer = /** @class */ (function () {
+    /**
+     * constructor
+     * @param option
+     */
     function DuckTimer(option) {
         if (option === void 0) { option = {}; }
         this.delay = null;
@@ -748,15 +752,27 @@ var DuckTimer = /** @class */ (function () {
         this.setOption(option);
     }
     Object.defineProperty(DuckTimer.prototype, "time", {
+        /**
+         * Get clock's time.
+         * @return
+         */
         get: function () {
             return this.clock.time;
         },
+        /**
+         * Set clock's time.
+         * @param  ms milliseconds
+         */
         set: function (ms) {
             this.clock.time = ms;
         },
         enumerable: true,
         configurable: true
     });
+    /**
+     * getDefaultOption
+     * @return
+     */
     DuckTimer.prototype.getDefaultOption = function () {
         return {
             setTime: 0,
@@ -773,6 +789,11 @@ var DuckTimer = /** @class */ (function () {
             enableAutoDelay: true,
         };
     };
+    /**
+     * setOption
+     * @param  option
+     * @return
+     */
     DuckTimer.prototype.setOption = function (option) {
         if (option === void 0) { option = {}; }
         this.option = Object(__WEBPACK_IMPORTED_MODULE_1_lodash_es_assignIn__["a" /* default */])(this.option, option);
@@ -787,40 +808,82 @@ var DuckTimer = /** @class */ (function () {
         }
         return this;
     };
+    /**
+     * Get clock.
+     * @return
+     */
     DuckTimer.prototype.getClock = function () {
         return this.clock;
     };
+    /**
+     * Get event emitter.
+     * @return
+     */
     DuckTimer.prototype.getEventEmitter = function () {
         return this.event;
     };
+    /**
+     * Set countdown.
+     * @param  date      countdown date.
+     * @param  startDate start date. default is now.
+     * @return
+     */
     DuckTimer.prototype.setCountdown = function (date, startDate) {
         if (startDate === void 0) { startDate = new Date(); }
         this.clock.setDistance(startDate, date);
         return this;
     };
+    /**
+     * Set interval
+     * @param  ms       milliseconds
+     * @param  callback
+     * @return
+     */
     DuckTimer.prototype.setInterval = function (ms, callback) {
         if (callback === void 0) { callback = null; }
         this.option.interval = ms;
         return this.onInterval(callback);
     };
+    /**
+     * Add listener on 'interval' event.
+     * @param  callback
+     * @return
+     */
     DuckTimer.prototype.onInterval = function (callback) {
         if (typeof callback === 'function') {
             this.event.on(this.option.eventName.interval, callback);
         }
         return this;
     };
+    /**
+     * Set timeout.
+     * @param  ms       milliseconds
+     * @param  callback
+     * @return
+     */
     DuckTimer.prototype.setTimeout = function (ms, callback) {
         if (callback === void 0) { callback = null; }
         this.option.timeout = ms;
         this.clock.setTimeout(this.option.timeout);
         return this.onTimeout(callback);
     };
+    /**
+     * Add listener on 'timeout' event.
+     * @param  callback
+     * @return
+     */
     DuckTimer.prototype.onTimeout = function (callback) {
         if (typeof callback === 'function') {
             this.event.on(this.option.eventName.timeout, callback);
         }
         return this;
     };
+    /**
+     * Set delay.
+     * @param  ms milliseconds
+     * @param  cb callback when the delay is over.
+     * @return
+     */
     DuckTimer.prototype.setDelay = function (ms, cb) {
         if (cb === void 0) { cb = null; }
         this.delay = {
@@ -829,6 +892,9 @@ var DuckTimer = /** @class */ (function () {
         };
         return this;
     };
+    /**
+     * timer start.
+     */
     DuckTimer.prototype.start = function () {
         if (this.isPaused) {
             this.isPaused = false;
@@ -844,15 +910,20 @@ var DuckTimer = /** @class */ (function () {
             this.startTick();
         }
     };
+    /**
+     * timer stop.
+     */
     DuckTimer.prototype.stop = function () {
         this.isPaused = true;
     };
+    /**
+     * timer reset.
+     */
     DuckTimer.prototype.reset = function () {
         this.clearTick();
         this.isPaused = false;
         this.time = 0;
     };
-    // private
     DuckTimer.prototype.tickProcess = function () {
         if (this.isPaused) {
             return;
@@ -2531,6 +2602,10 @@ function nativeKeysIn(object) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_padStart__ = __webpack_require__(58);
 
 var TimeClock = /** @class */ (function () {
+    /**
+     * constructor
+     * @param ms milliseconds
+     */
     function TimeClock(ms) {
         if (ms === void 0) { ms = 0; }
         this.startDate = null;
@@ -2541,6 +2616,10 @@ var TimeClock = /** @class */ (function () {
         this.time = ms;
     }
     Object.defineProperty(TimeClock.prototype, "seconds", {
+        /**
+         * get time as seconds.
+         * @return
+         */
         get: function () {
             return Math.floor(this.time / 1000);
         },
@@ -2548,6 +2627,10 @@ var TimeClock = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(TimeClock.prototype, "minutes", {
+        /**
+         * get time as minutes.
+         * @return
+         */
         get: function () {
             return Math.floor(this.time / (1000 * 60));
         },
@@ -2555,6 +2638,10 @@ var TimeClock = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(TimeClock.prototype, "hours", {
+        /**
+         * get time as hours.
+         * @return
+         */
         get: function () {
             return Math.floor(this.time / (1000 * 60 * 60));
         },
@@ -2562,6 +2649,10 @@ var TimeClock = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(TimeClock.prototype, "days", {
+        /**
+         * get time as days
+         * @return
+         */
         get: function () {
             return Math.floor(this.time / (1000 * 60 * 60 * 24));
         },
@@ -2569,6 +2660,10 @@ var TimeClock = /** @class */ (function () {
         configurable: true
     });
     Object.defineProperty(TimeClock.prototype, "remain", {
+        /**
+         * get remain clock when it exists.
+         * @return
+         */
         get: function () {
             return this.distance
                 ? new TimeClock(this.distance.time - this.time)
@@ -2579,16 +2674,31 @@ var TimeClock = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    /**
+     * set timeout.
+     * @param  ms milliseconds
+     * @return
+     */
     TimeClock.prototype.setTimeout = function (ms) {
         this.timeout = new TimeClock(ms);
         return this;
     };
+    /**
+     * Set startDate and endDate.
+     * @param  start
+     * @param  end
+     * @return
+     */
     TimeClock.prototype.setDistance = function (start, end) {
         this.startDate = start instanceof Date ? start : new Date(start);
         this.endDate = end instanceof Date ? end : new Date(end);
         this.distance = new TimeClock(this.endDate.getTime() - this.startDate.getTime());
         return this;
     };
+    /**
+     * Returns time as data object.
+     * @return
+     */
     TimeClock.prototype.toData = function () {
         var t = this.time;
         return {
@@ -2599,6 +2709,10 @@ var TimeClock = /** @class */ (function () {
             ms: t % 1000,
         };
     };
+    /**
+     * Returns time as string. e.g. '2d 05h 33m 21s 420ms'
+     * @return
+     */
     TimeClock.prototype.toTimeString = function () {
         var t = this.toData();
         var refine = function (num) { return Object(__WEBPACK_IMPORTED_MODULE_0_lodash_es_padStart__["a" /* default */])(num.toString(), 2, '0'); };
