@@ -8,13 +8,19 @@ export interface ClockData {
   ms: number;
 }
 
+/**
+ * Simple time clock class.
+ *
+ * @export
+ * @class TimeClock
+ */
 export default class TimeClock {
   time: number;
-  startDate: Date|null = null;
-  endDate: Date|null = null;
-  distance: TimeClock|null = null;
-  timeout: TimeClock|null = null;
-  delayed: number|undefined = undefined;
+  startDate?: Date;
+  endDate?: Date;
+  distance?: TimeClock;
+  timeout?: TimeClock;
+  delayed?: number;
 
   /**
    * constructor
@@ -57,7 +63,7 @@ export default class TimeClock {
   }
 
   /**
-   * get remain clock when it exists.
+   * get remain clock if it exists.
    * @return
    */
   get remain(): TimeClock|null {

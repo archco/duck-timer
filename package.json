@@ -1,9 +1,9 @@
 {
   "name": "duck-timer",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "The helpful timer class for browser and node.js.",
   "main": "dist/duck-timer.js",
-  "types": "src/duck-timer.ts",
+  "types": "src/duck-timer.d.ts",
   "directories": {
     "doc": "doc",
     "lib": "lib",

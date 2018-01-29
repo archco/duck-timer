@@ -736,6 +736,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+/**
+ * The timer class that can stopwatch, timeout and countdown.
+ *
+ * @export
+ * @class DuckTimer
+ */
 var DuckTimer = /** @class */ (function () {
     /**
      * constructor
@@ -743,9 +749,7 @@ var DuckTimer = /** @class */ (function () {
      */
     function DuckTimer(option) {
         if (option === void 0) { option = {}; }
-        this.delay = null;
         this.isPaused = false;
-        this.tickIntervalId = null;
         this.clock = new __WEBPACK_IMPORTED_MODULE_2__time_clock__["a" /* default */]();
         this.event = new __WEBPACK_IMPORTED_MODULE_0_eventemitter3__["EventEmitter"]();
         this.option = this.getDefaultOption();
@@ -2601,6 +2605,12 @@ function nativeKeysIn(object) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_es_padStart__ = __webpack_require__(58);
 
+/**
+ * Simple time clock class.
+ *
+ * @export
+ * @class TimeClock
+ */
 var TimeClock = /** @class */ (function () {
     /**
      * constructor
@@ -2608,11 +2618,6 @@ var TimeClock = /** @class */ (function () {
      */
     function TimeClock(ms) {
         if (ms === void 0) { ms = 0; }
-        this.startDate = null;
-        this.endDate = null;
-        this.distance = null;
-        this.timeout = null;
-        this.delayed = undefined;
         this.time = ms;
     }
     Object.defineProperty(TimeClock.prototype, "seconds", {
@@ -2661,7 +2666,7 @@ var TimeClock = /** @class */ (function () {
     });
     Object.defineProperty(TimeClock.prototype, "remain", {
         /**
-         * get remain clock when it exists.
+         * get remain clock if it exists.
          * @return
          */
         get: function () {

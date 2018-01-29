@@ -37,10 +37,7 @@ interface DuckTimerOptions {
    */
   enableAutoDelay?: boolean;
 }
-/**
- * [constructor description]
- * @param option [description]
- */
+
 interface Delay {
   /** Delay time. */
   time: number;
@@ -48,13 +45,19 @@ interface Delay {
   callback?: CallbackFn;
 }
 
+/**
+ * The timer class that can stopwatch, timeout and countdown.
+ *
+ * @export
+ * @class DuckTimer
+ */
 export default class DuckTimer {
   clock: TimeClock;
   event: EventEmitter;
   option: DuckTimerOptions;
-  delay: Delay|null = null;
   isPaused: boolean = false;
-  private tickIntervalId: number|null = null;
+  delay?: Delay;
+  private tickIntervalId?: number;
 
   /**
    * constructor
