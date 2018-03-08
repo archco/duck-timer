@@ -1,15 +1,12 @@
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const merge = require('webpack-merge');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
-module.exports = {
-  entry: {
-    'duck-timer': './src/duck-timer.ts',
-    'duck-timer.min': './src/duck-timer.ts',
-  },
+const dev = {
+  entry: './src/duck-timer.ts',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js',
+    filename: 'duck-timer.js',
     library: 'DuckTimer',
     libraryTarget: 'umd',
   },
@@ -18,7 +15,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: 'awesome-typescript-loader',
+        use: 'ts-loader',
       },
       {
         test: /\.js$/,
@@ -30,16 +27,24 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.ts'],
   },
+  devtool: 'source-map',
+};
+
+const min = merge(dev, {
+  output: {
+    filename: 'duck-timer.min.js',
+  },
+  optimization: {
+    minimize: true,
+  },
+  devtool: false,
   plugins: [
-    new UglifyJsPlugin({
-      sourceMap: false,
-      include: /\.min\.js$/,
-    }),
     new WebpackNotifierPlugin({
       title: 'Webpack',
       alwaysNotify: true,
       sound: false,
     }),
   ],
-  devtool: 'source-map',
-};
+});
+
+module.exports = [dev, min];
