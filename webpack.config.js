@@ -9,6 +9,7 @@ const dev = {
     filename: 'duck-timer.js',
     library: 'DuckTimer',
     libraryTarget: 'umd',
+    globalObject: 'this',
   },
   module: {
     rules: [

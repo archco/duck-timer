@@ -1,4 +1,3 @@
-import assignIn from 'lodash-es/assignIn';
 import EventEmitter from './emitter';
 import TimeClock from './time-clock';
 
@@ -113,7 +112,7 @@ export default class DuckTimer {
    * @return
    */
   setOption(option: DuckTimerOptions = {}): this {
-    this.option = assignIn(this.option, option);
+    this.option = {...this.option, ...option};
     this.time = this.option.setTime;
     this.onInterval(this.option.onInterval);
     if (this.option.timeout) {

@@ -29,9 +29,7 @@
   },
   "homepage": "https://github.com/archco/duck-timer#readme",
   "dependencies": {
-    "@types/lodash-es": "^4.17.0",
-    "eventemitter3": "^3.0.1",
-    "lodash-es": "^4.17.7"
+    "eventemitter3": "^3.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
