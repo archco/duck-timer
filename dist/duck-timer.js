@@ -438,7 +438,7 @@ if (true) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _emitter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./emitter */ "./src/emitter.ts");
+/* harmony import */ var _event_emitter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./event-emitter */ "./src/event-emitter.ts");
 /* harmony import */ var _time_clock__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./time-clock */ "./src/time-clock.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TimeClock", function() { return _time_clock__WEBPACK_IMPORTED_MODULE_1__["default"]; });
 
@@ -468,7 +468,7 @@ var DuckTimer = /** @class */ (function () {
         if (option === void 0) { option = {}; }
         this.isPaused = false;
         this.clock = new _time_clock__WEBPACK_IMPORTED_MODULE_1__["default"]();
-        this.event = new _emitter__WEBPACK_IMPORTED_MODULE_0__["default"]();
+        this.event = new _event_emitter__WEBPACK_IMPORTED_MODULE_0__["default"]();
         this.option = this.getDefaultOption();
         this.setOption(option);
     }
@@ -701,10 +701,10 @@ var DuckTimer = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./src/emitter.ts":
-/*!************************!*\
-  !*** ./src/emitter.ts ***!
-  \************************/
+/***/ "./src/event-emitter.ts":
+/*!******************************!*\
+  !*** ./src/event-emitter.ts ***!
+  \******************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -723,14 +723,14 @@ var __extends = (undefined && undefined.__extends) || (function () {
     };
 })();
 
-var Emitter = /** @class */ (function (_super) {
-    __extends(Emitter, _super);
-    function Emitter() {
+var EventEmitter = /** @class */ (function (_super) {
+    __extends(EventEmitter, _super);
+    function EventEmitter() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    return Emitter;
+    return EventEmitter;
 }(eventemitter3__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]));
-/* harmony default export */ __webpack_exports__["default"] = (Emitter);
+/* harmony default export */ __webpack_exports__["default"] = (EventEmitter);
 
 
 /***/ }),

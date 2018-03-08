@@ -1,7 +1,6 @@
-import { EventEmitter } from 'eventemitter3';
+import { EventEmitter as Emitter } from 'eventemitter3';
 
-export { TimeClock };
-export default DuckTimer;
+declare class EventEmitter extends Emitter {}
 
 declare interface ClockData {
   day: number;
@@ -17,7 +16,7 @@ declare interface ClockData {
  * @export
  * @class TimeClock
  */
-declare class TimeClock {
+export class TimeClock {
   time: number;
   startDate?: Date;
   endDate?: Date;
@@ -110,7 +109,7 @@ declare interface Delay {
  * @export
  * @class DuckTimer
  */
-declare class DuckTimer {
+export default class DuckTimer {
   clock: TimeClock;
   event: EventEmitter;
   option: DuckTimerOptions;

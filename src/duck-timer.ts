@@ -1,4 +1,4 @@
-import EventEmitter from './emitter';
+import EventEmitter from './event-emitter';
 import TimeClock from './time-clock';
 
 export { TimeClock };
