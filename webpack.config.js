@@ -4,6 +4,7 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 
 const dev = {
   entry: './src/duck-timer.ts',
+  mode: 'development',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'duck-timer.js',
