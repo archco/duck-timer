@@ -38,7 +38,7 @@ timer.reset();
 import DuckTimer from 'duck-timer';
 const timer = new DuckTimer({ interval: 1000 });
 
-timer.setCountdown('2017-12-25 00:00:00')
+timer.setCountdown(`Dec 25, ${new Date().getFullYear()}`)
   .onInterval(res => console.log(res.remain.seconds))
   .onTimeout(() => console.log('Merry Christmas!!!'))
   .start();

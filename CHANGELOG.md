@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.4.6] - 2018-04-01
+
+### Changed
+
+- Changes export statements. (9d192fc1dafffd08547add2c10b93304015cac2b)
+
 ## [0.4.3] - 2018-03-08
 
 ### Added
@@ -48,7 +54,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 First Release.
 
-[Unreleased]: https://github.com/archco/duck-timer/compare/v0.4.3...HEAD
+[Unreleased]: https://github.com/archco/duck-timer/compare/v0.4.6...HEAD
+[0.4.6]: https://github.com/archco/duck-timer/compare/v0.4.3...v0.4.6
 [0.4.3]: https://github.com/archco/duck-timer/compare/v0.4.0...v0.4.3
 [0.4.0]: https://github.com/archco/duck-timer/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/archco/duck-timer/compare/v0.2.0...v0.3.0

@@ -3,9 +3,11 @@
 ### constructor
 
 - Syntax
+
   ``` js
   let timeClock = new TimeClock(milliseconds = 0);
   ```
+
 - Param `Number` [milliseconds = 0]
 
 ### seconds
@@ -53,9 +55,11 @@ let remainTimeClock = timeClock.remain;
 Set startDate, endDate and distance.
 
 - Syntax
+
   ``` js
   timeClock.setDistance(start, end);
   ```
+
 - Param `Date|String` start
 - Param `Date|String` end
 - Return `void`
@@ -65,9 +69,11 @@ Set startDate, endDate and distance.
 Return time to data object.
 
 - Syntax
+
   ``` js
   let obj = timeClock.toData();
   ```
+
 - Return `Object` - object keys: `day` `hour` `min` `sec` `ms`
 
 ### toTimeString
@@ -75,7 +81,9 @@ Return time to data object.
 Return time to string.
 
 - Syntax
+
   ``` js
   let str = timeClock.toTimeString();
   ```
+
 - Return `String` - e.g. '2d 05h 33m 21s 420ms'
