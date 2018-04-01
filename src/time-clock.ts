@@ -14,7 +14,7 @@ export interface ClockData {
  * @export
  * @class TimeClock
  */
-export default class TimeClock {
+export class TimeClock {
   time: number;
   startDate?: Date;
   endDate?: Date;
@@ -145,3 +145,5 @@ export default class TimeClock {
     return str.trim();
   }
 }
+
+export default TimeClock;

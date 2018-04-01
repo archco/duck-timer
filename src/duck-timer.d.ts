@@ -1,5 +1,7 @@
 import { EventEmitter as Emitter } from 'eventemitter3';
 
+export as namespace DuckTimer;
+
 declare class EventEmitter extends Emitter {}
 
 declare interface ClockData {
@@ -63,14 +65,14 @@ export class TimeClock {
 }
 
 /** Callback function type. */
-declare type CallbackFn = (clock: TimeClock) => void;
+export type CallbackFn = (clock: TimeClock) => void;
 
-declare interface EventNames {
+export interface EventNames {
   interval?: string;
   timeout?: string;
 }
 
-declare interface DuckTimerOptions {
+export interface DuckTimerOptions {
   /** Initialize clock time. */
   setTime?: number;
   /** clock's tick interval time. */
@@ -96,7 +98,7 @@ declare interface DuckTimerOptions {
   enableAutoDelay?: boolean;
 }
 
-declare interface Delay {
+export interface Delay {
   /** Delay time. */
   time: number;
   /** a callback when finished delay. */
@@ -109,7 +111,7 @@ declare interface Delay {
  * @export
  * @class DuckTimer
  */
-export default class DuckTimer {
+export class DuckTimer {
   clock: TimeClock;
   event: EventEmitter;
   option: DuckTimerOptions;
@@ -203,3 +205,5 @@ export default class DuckTimer {
    */
   reset(): void;
 }
+
+export default DuckTimer;

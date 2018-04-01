@@ -4,14 +4,14 @@ import TimeClock from './time-clock';
 export { TimeClock };
 
 /** Callback function type. */
-type CallbackFn = (clock: TimeClock) => void;
+export type CallbackFn = (clock: TimeClock) => void;
 
-interface EventNames {
+export interface EventNames {
   interval?: string;
   timeout?: string;
 }
 
-interface DuckTimerOptions {
+export interface DuckTimerOptions {
   /** Initialize clock time. */
   setTime?: number;
   /** clock's tick interval time. */
@@ -37,7 +37,7 @@ interface DuckTimerOptions {
   enableAutoDelay?: boolean;
 }
 
-interface Delay {
+export interface Delay {
   /** Delay time. */
   time: number;
   /** a callback when finished delay. */
@@ -50,7 +50,7 @@ interface Delay {
  * @export
  * @class DuckTimer
  */
-export default class DuckTimer {
+export class DuckTimer {
   clock: TimeClock;
   event: EventEmitter;
   option: DuckTimerOptions;
@@ -310,3 +310,5 @@ export default class DuckTimer {
     }
   }
 }
+
+export default DuckTimer;

@@ -433,11 +433,12 @@ if (true) {
 /*!***************************!*\
   !*** ./src/duck-timer.ts ***!
   \***************************/
-/*! exports provided: TimeClock, default */
+/*! exports provided: TimeClock, DuckTimer, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DuckTimer", function() { return DuckTimer; });
 /* harmony import */ var _event_emitter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./event-emitter */ "./src/event-emitter.ts");
 /* harmony import */ var _time_clock__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./time-clock */ "./src/time-clock.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TimeClock", function() { return _time_clock__WEBPACK_IMPORTED_MODULE_1__["default"]; });
@@ -696,6 +697,7 @@ var DuckTimer = /** @class */ (function () {
     };
     return DuckTimer;
 }());
+
 /* harmony default export */ __webpack_exports__["default"] = (DuckTimer);
 
 
@@ -739,11 +741,12 @@ var EventEmitter = /** @class */ (function (_super) {
 /*!***************************!*\
   !*** ./src/time-clock.ts ***!
   \***************************/
-/*! exports provided: default */
+/*! exports provided: TimeClock, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimeClock", function() { return TimeClock; });
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/utils.ts");
 
 /**
@@ -880,6 +883,7 @@ var TimeClock = /** @class */ (function () {
     };
     return TimeClock;
 }());
+
 /* harmony default export */ __webpack_exports__["default"] = (TimeClock);
 
 
