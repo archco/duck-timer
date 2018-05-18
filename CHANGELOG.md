@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.4.7] - 2018-05-18
+
+## Changed
+
+- Change testing tool to Jest. #4 #5
+
 ## [0.4.6] - 2018-04-01
 
 ### Changed
@@ -54,7 +60,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 First Release.
 
-[Unreleased]: https://github.com/archco/duck-timer/compare/v0.4.6...HEAD
+[Unreleased]: https://github.com/archco/duck-timer/compare/v0.4.7...HEAD
+[0.4.7]: https://github.com/archco/duck-timer/compare/v0.4.6...v0.4.7
 [0.4.6]: https://github.com/archco/duck-timer/compare/v0.4.3...v0.4.6
 [0.4.3]: https://github.com/archco/duck-timer/compare/v0.4.0...v0.4.3
 [0.4.0]: https://github.com/archco/duck-timer/compare/v0.3.0...v0.4.0
