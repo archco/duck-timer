@@ -655,12 +655,7 @@ var DuckTimer = /** @class */ (function () {
         if (this.time % this.option.interval === 0) {
             this.event.emit(this.option.eventName.interval, this.clock);
         }
-        // Timeout.
-        if (this.time >= this.option.timeout) {
-            this.event.emit(this.option.eventName.timeout, this.clock);
-            this.clearTick();
-        }
-        // Countdown finished.
+        // Timeout or Countdown finished.
         if (this.clock.remain && this.clock.remain.time <= 0) {
             this.event.emit(this.option.eventName.timeout, this.clock);
             this.clearTick();

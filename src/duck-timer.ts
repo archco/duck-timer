@@ -25,7 +25,7 @@ export interface DuckTimerOptions {
   /** a callback when occur 'timeout' event. */
   onTimeout?: CallbackFn;
   /** Set countdown date. */
-  countdownDate?: Date;
+  countdownDate?: Date|string;
   /** Specifying event names. */
   eventName?: EventNames;
   /**
@@ -259,13 +259,7 @@ export class DuckTimer {
       this.event.emit(this.option.eventName.interval, this.clock);
     }
 
-    // Timeout.
-    if (this.time >= this.option.timeout) {
-      this.event.emit(this.option.eventName.timeout, this.clock);
-      this.clearTick();
-    }
-
-    // Countdown finished.
+    // Timeout or Countdown finished.
     if (this.clock.remain && this.clock.remain.time <= 0) {
       this.event.emit(this.option.eventName.timeout, this.clock);
       this.clearTick();
