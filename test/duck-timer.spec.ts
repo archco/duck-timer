@@ -160,13 +160,12 @@ describe('#DuckTimer', () => {
       it('Second argument is optional.', () => {
         const timer = new DuckTimer();
         const callback = jest.fn();
-        const m = 10;
         const date = new Date();
-        date.setMinutes(date.getSeconds() + m);
+        date.setSeconds(date.getSeconds() + 10);
         timer.setCountdown(date).setInterval(1000, callback).start();
-        jest.advanceTimersByTime(m * 1000);
+        jest.advanceTimersByTime(10000);
         expect(callback).toBeCalled();
-        expect(callback).toHaveBeenCalledTimes(m);
+        expect(callback).toHaveBeenCalledTimes(10);
       });
     });
 
