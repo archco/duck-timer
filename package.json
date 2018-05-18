@@ -45,11 +45,12 @@
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": [
       "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
+      "js"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.ts",
+      "!**/node_modules/**"
     ]
   }
 }
