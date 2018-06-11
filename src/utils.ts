@@ -12,5 +12,5 @@ function makePad(chars: string, limit: number): string {
   while (chars.length < limit) {
     chars += chars;
   }
-  return chars.length > limit ? chars.substring(chars.length - limit) : chars;
+  return chars.substring(0, limit);
 }
