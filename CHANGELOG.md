@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.4.8] - 2018-06-11
+
+### Changed
+
+- Fix util methods `padStart()` and `padEnd()`. (490f3f51789991c0fccafe74e292fcbb9c789a21)
+
 ## [0.4.7] - 2018-05-18
 
 ### Changed
@@ -60,7 +66,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 First Release.
 
-[Unreleased]: https://github.com/archco/duck-timer/compare/v0.4.7...HEAD
+[Unreleased]: https://github.com/archco/duck-timer/compare/v0.4.8...HEAD
+[0.4.8]: https://github.com/archco/duck-timer/compare/v0.4.7...v0.4.8
 [0.4.7]: https://github.com/archco/duck-timer/compare/v0.4.6...v0.4.7
 [0.4.6]: https://github.com/archco/duck-timer/compare/v0.4.3...v0.4.6
 [0.4.3]: https://github.com/archco/duck-timer/compare/v0.4.0...v0.4.3
