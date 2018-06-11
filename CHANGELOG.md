@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.4.7] - 2018-05-18
 
-## Changed
+### Changed
 
 - Change testing tool to Jest. #4 #5
 

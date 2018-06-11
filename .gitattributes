@@ -12,3 +12,4 @@ LICENSE         text eol=lf
 *.map   binary
 
 test/*    linguist-vendored
+webpack.config.js linguist-vendored
