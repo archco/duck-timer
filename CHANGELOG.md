@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.4.8] - 2018-06-11
 
-### Changed
+### Fixed
 
 - Fix util methods `padStart()` and `padEnd()`. (490f3f51789991c0fccafe74e292fcbb9c789a21)
 
