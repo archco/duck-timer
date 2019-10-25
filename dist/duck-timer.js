@@ -536,7 +536,7 @@ var DuckTimer = /** @class */ (function () {
      */
     DuckTimer.prototype.setOption = function (option) {
         if (option === void 0) { option = {}; }
-        this.option = __assign({}, this.option, option);
+        this.option = __assign(__assign({}, this.option), option);
         this.time = this.option.setTime;
         this.onInterval(this.option.onInterval);
         if (this.option.timeout) {
@@ -733,7 +733,7 @@ var __extends = (undefined && undefined.__extends) || (function () {
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
             function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
         return extendStatics(d, b);
-    }
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
