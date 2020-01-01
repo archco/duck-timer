@@ -4,7 +4,7 @@
 [![npm version](https://badge.fury.io/js/duck-timer.svg)](https://www.npmjs.com/package/duck-timer)
 [![Downloads](https://img.shields.io/npm/dm/duck-timer.svg)](https://www.npmjs.com/package/duck-timer)
 
-The helpful timer class for browser and node.js.
+A helpful timer class for both of browsers and node.js.
 
 ## Installation
 

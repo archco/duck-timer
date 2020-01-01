@@ -448,13 +448,15 @@ if (true) {
 /*!***************************!*\
   !*** ./src/duck-timer.ts ***!
   \***************************/
-/*! exports provided: TimeClock, DuckTimer, default */
+/*! exports provided: EventEmitter, TimeClock, DuckTimer, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DuckTimer", function() { return DuckTimer; });
-/* harmony import */ var _event_emitter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./event-emitter */ "./src/event-emitter.ts");
+/* harmony import */ var eventemitter3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! eventemitter3 */ "./node_modules/eventemitter3/index.js");
+/* harmony import */ var eventemitter3__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(eventemitter3__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "EventEmitter", function() { return eventemitter3__WEBPACK_IMPORTED_MODULE_0___default.a; });
 /* harmony import */ var _time_clock__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./time-clock */ "./src/time-clock.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TimeClock", function() { return _time_clock__WEBPACK_IMPORTED_MODULE_1__["default"]; });
 
@@ -487,7 +489,7 @@ var DuckTimer = /** @class */ (function () {
         if (option === void 0) { option = {}; }
         this.isPaused = false;
         this.clock = new _time_clock__WEBPACK_IMPORTED_MODULE_1__["default"]();
-        this.event = new _event_emitter__WEBPACK_IMPORTED_MODULE_0__["default"]();
+        this.event = new eventemitter3__WEBPACK_IMPORTED_MODULE_0___default.a();
         this.option = this.getDefaultOption();
         this.setOption(option);
     }
@@ -712,43 +714,6 @@ var DuckTimer = /** @class */ (function () {
 }());
 
 /* harmony default export */ __webpack_exports__["default"] = (DuckTimer);
-
-
-/***/ }),
-
-/***/ "./src/event-emitter.ts":
-/*!******************************!*\
-  !*** ./src/event-emitter.ts ***!
-  \******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var eventemitter3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! eventemitter3 */ "./node_modules/eventemitter3/index.js");
-/* harmony import */ var eventemitter3__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(eventemitter3__WEBPACK_IMPORTED_MODULE_0__);
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-
-var EventEmitter = /** @class */ (function (_super) {
-    __extends(EventEmitter, _super);
-    function EventEmitter() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return EventEmitter;
-}(eventemitter3__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]));
-/* harmony default export */ __webpack_exports__["default"] = (EventEmitter);
 
 
 /***/ }),
