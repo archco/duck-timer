@@ -1,7 +1,7 @@
-import EventEmitter from './event-emitter';
+import EventEmitter from 'eventemitter3';
 import TimeClock from './time-clock';
 
-export { TimeClock };
+export { EventEmitter, TimeClock };
 
 /** Callback function type. */
 export type CallbackFn = (clock: TimeClock) => void;

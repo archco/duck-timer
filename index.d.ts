@@ -1,8 +1,6 @@
-import { EventEmitter as Emitter } from 'eventemitter3';
+import EventEmitter from 'eventemitter3';
 
 export as namespace DuckTimer;
-
-declare class EventEmitter extends Emitter {}
 
 declare interface ClockData {
   day: number;
@@ -11,6 +9,8 @@ declare interface ClockData {
   sec: number;
   ms: number;
 }
+
+export { EventEmitter, ClockData };
 
 /**
  * Simple time clock class.
