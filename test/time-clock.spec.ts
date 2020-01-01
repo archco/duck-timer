@@ -51,6 +51,19 @@ describe('#TimeClock', () => {
       const clock = new TimeClock(9000000);
       expect(typeof clock.toTimeString()).toBe('string');
     });
+
+    it('strict test', () => {
+      // 25 hours
+      expect(new TimeClock(90e6).toTimeString()).toBe('1d 01h 00m 00s 0ms');
+      // 70 minutes
+      expect(new TimeClock(42e5).toTimeString()).toBe('01h 10m 00s 0ms');
+      // 70 seconds
+      expect(new TimeClock(70e3).toTimeString()).toBe('01m 10s 0ms');
+      // 2 seconds
+      expect(new TimeClock(2000).toTimeString()).toBe('02s 0ms');
+      // 100 ms
+      expect(new TimeClock(100).toTimeString()).toBe('100ms');
+    });
   });
 
   describe('#setDistance', () => {

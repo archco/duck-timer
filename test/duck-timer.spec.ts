@@ -106,7 +106,6 @@ describe('#DuckTimer', () => {
 
     it('In clock, "timeout" and "remain" properties defined automatically.', () => {
       const timer = new DuckTimer();
-      const callback = jest.fn();
 
       timer.setTimeout(3000).start();
       expect(timer.getClock().timeout instanceof TimeClock).toBeTruthy();
@@ -130,6 +129,16 @@ describe('#DuckTimer', () => {
         jest.advanceTimersByTime(1000);
         expect(timer.time).toEqual(1000);
         expect(callback).toBeCalled();
+      });
+
+      it('restart test', () => {
+        timer.start();
+        jest.advanceTimersByTime(1000);
+        timer.stop();
+        jest.advanceTimersByTime(1000);
+        timer.start();
+        jest.advanceTimersByTime(1000);
+        expect(timer.time).toEqual(2000);
       });
     });
 
@@ -195,7 +204,6 @@ describe('#DuckTimer', () => {
     describe('Auto delay test.', () => {
       it('Real time = delayed time + time', () => {
         const timer = new DuckTimer();
-        const callback = jest.fn();
         const interval = 1000;
         let result: TimeClock;
         timer.setOption({ enableAutoDelay: true })
