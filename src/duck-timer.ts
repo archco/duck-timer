@@ -56,7 +56,7 @@ export class DuckTimer {
   option: DuckTimerOptions;
   isPaused: boolean = false;
   delay?: Delay;
-  private tickIntervalId?: number;
+  private tickIntervalId?: ReturnType<typeof setInterval>;
 
   /**
    * constructor

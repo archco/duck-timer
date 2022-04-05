@@ -7,103 +7,17 @@
 		exports["DuckTimer"] = factory();
 	else
 		root["DuckTimer"] = factory();
-})(this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./src/duck-timer.ts");
-/******/ })
-/************************************************************************/
-/******/ ({
+})(this, () => {
+return /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/eventemitter3/index.js":
 /*!*********************************************!*\
   !*** ./node_modules/eventemitter3/index.js ***!
   \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ ((module) => {
 
-"use strict";
 
 
 var has = Object.prototype.hasOwnProperty
@@ -444,22 +358,272 @@ if (true) {
 
 /***/ }),
 
-/***/ "./src/duck-timer.ts":
+/***/ "./src/time-clock.ts":
+/*!***************************!*\
+  !*** ./src/time-clock.ts ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TimeClock": () => (/* binding */ TimeClock),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/utils.ts");
+
+/**
+ * Simple time clock class.
+ *
+ * @export
+ * @class TimeClock
+ */
+var TimeClock = /** @class */ (function () {
+    /**
+     * constructor
+     * @param ms milliseconds
+     */
+    function TimeClock(ms) {
+        if (ms === void 0) { ms = 0; }
+        this.time = ms;
+    }
+    Object.defineProperty(TimeClock.prototype, "seconds", {
+        /**
+         * get time as seconds.
+         * @return
+         */
+        get: function () {
+            return Math.floor(this.time / 1000);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(TimeClock.prototype, "minutes", {
+        /**
+         * get time as minutes.
+         * @return
+         */
+        get: function () {
+            return Math.floor(this.time / (1000 * 60));
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(TimeClock.prototype, "hours", {
+        /**
+         * get time as hours.
+         * @return
+         */
+        get: function () {
+            return Math.floor(this.time / (1000 * 60 * 60));
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(TimeClock.prototype, "days", {
+        /**
+         * get time as days
+         * @return
+         */
+        get: function () {
+            return Math.floor(this.time / (1000 * 60 * 60 * 24));
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(TimeClock.prototype, "remain", {
+        /**
+         * get remain clock if it exists.
+         * @return
+         */
+        get: function () {
+            return this.distance
+                ? new TimeClock(this.distance.time - this.time)
+                : this.timeout
+                    ? new TimeClock(this.timeout.time - this.time)
+                    : null;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    /**
+     * set timeout.
+     * @param  ms milliseconds
+     * @return
+     */
+    TimeClock.prototype.setTimeout = function (ms) {
+        this.timeout = new TimeClock(ms);
+        return this;
+    };
+    /**
+     * Set startDate and endDate.
+     * @param  start
+     * @param  end
+     * @return
+     */
+    TimeClock.prototype.setDistance = function (start, end) {
+        this.startDate = start instanceof Date ? start : new Date(start);
+        this.endDate = end instanceof Date ? end : new Date(end);
+        this.distance = new TimeClock(this.endDate.getTime() - this.startDate.getTime());
+        return this;
+    };
+    /**
+     * Returns time as data object.
+     * @return
+     */
+    TimeClock.prototype.toData = function () {
+        var t = this.time;
+        return {
+            day: Math.floor(t / (1000 * 60 * 60 * 24)),
+            hour: Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+            min: Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)),
+            sec: Math.floor((t % (1000 * 60)) / 1000),
+            ms: t % 1000,
+        };
+    };
+    /**
+     * Returns time as string. e.g. '2d 05h 33m 21s 420ms'
+     * @return
+     */
+    TimeClock.prototype.toTimeString = function () {
+        var t = this.toData();
+        var refine = function (num) { return (0,_utils__WEBPACK_IMPORTED_MODULE_0__.padStart)(num.toString(), 2, '0'); };
+        var str = '';
+        if (t.day > 0) {
+            str += "".concat(t.day, "d");
+        }
+        if (str.length > 0 || t.hour > 0) {
+            str += " ".concat(refine(t.hour), "h");
+        }
+        if (str.length > 0 || t.min > 0) {
+            str += " ".concat(refine(t.min), "m");
+        }
+        if (str.length > 0 || t.sec > 0) {
+            str += " ".concat(refine(t.sec), "s");
+        }
+        str += " ".concat(t.ms, "ms");
+        return str.trim();
+    };
+    return TimeClock;
+}());
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TimeClock);
+
+
+/***/ }),
+
+/***/ "./src/utils.ts":
+/*!**********************!*\
+  !*** ./src/utils.ts ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "padEnd": () => (/* binding */ padEnd),
+/* harmony export */   "padStart": () => (/* binding */ padStart)
+/* harmony export */ });
+function padStart(str, length, chars) {
+    var space = length - str.length;
+    return space > 0 ? "".concat(makePad(chars, space)).concat(str) : str;
+}
+function padEnd(str, length, chars) {
+    var space = length - str.length;
+    return space > 0 ? "".concat(str).concat(makePad(chars, space)) : str;
+}
+function makePad(chars, limit) {
+    while (chars.length < limit) {
+        chars += chars;
+    }
+    return chars.substring(0, limit);
+}
+
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
 /*!***************************!*\
   !*** ./src/duck-timer.ts ***!
   \***************************/
-/*! exports provided: EventEmitter, TimeClock, DuckTimer, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DuckTimer", function() { return DuckTimer; });
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DuckTimer": () => (/* binding */ DuckTimer),
+/* harmony export */   "EventEmitter": () => (/* reexport default from dynamic */ eventemitter3__WEBPACK_IMPORTED_MODULE_0___default.a),
+/* harmony export */   "TimeClock": () => (/* reexport safe */ _time_clock__WEBPACK_IMPORTED_MODULE_1__["default"]),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var eventemitter3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! eventemitter3 */ "./node_modules/eventemitter3/index.js");
 /* harmony import */ var eventemitter3__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(eventemitter3__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (default from non-harmony) */ __webpack_require__.d(__webpack_exports__, "EventEmitter", function() { return eventemitter3__WEBPACK_IMPORTED_MODULE_0___default.a; });
 /* harmony import */ var _time_clock__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./time-clock */ "./src/time-clock.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TimeClock", function() { return _time_clock__WEBPACK_IMPORTED_MODULE_1__["default"]; });
-
 var __assign = (undefined && undefined.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
@@ -489,7 +653,7 @@ var DuckTimer = /** @class */ (function () {
         if (option === void 0) { option = {}; }
         this.isPaused = false;
         this.clock = new _time_clock__WEBPACK_IMPORTED_MODULE_1__["default"]();
-        this.event = new eventemitter3__WEBPACK_IMPORTED_MODULE_0___default.a();
+        this.event = new (eventemitter3__WEBPACK_IMPORTED_MODULE_0___default())();
         this.option = this.getDefaultOption();
         this.setOption(option);
     }
@@ -508,7 +672,7 @@ var DuckTimer = /** @class */ (function () {
         set: function (ms) {
             this.clock.time = ms;
         },
-        enumerable: true,
+        enumerable: false,
         configurable: true
     });
     /**
@@ -713,192 +877,12 @@ var DuckTimer = /** @class */ (function () {
     return DuckTimer;
 }());
 
-/* harmony default export */ __webpack_exports__["default"] = (DuckTimer);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DuckTimer);
 
+})();
 
-/***/ }),
-
-/***/ "./src/time-clock.ts":
-/*!***************************!*\
-  !*** ./src/time-clock.ts ***!
-  \***************************/
-/*! exports provided: TimeClock, default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TimeClock", function() { return TimeClock; });
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils */ "./src/utils.ts");
-
-/**
- * Simple time clock class.
- *
- * @export
- * @class TimeClock
- */
-var TimeClock = /** @class */ (function () {
-    /**
-     * constructor
-     * @param ms milliseconds
-     */
-    function TimeClock(ms) {
-        if (ms === void 0) { ms = 0; }
-        this.time = ms;
-    }
-    Object.defineProperty(TimeClock.prototype, "seconds", {
-        /**
-         * get time as seconds.
-         * @return
-         */
-        get: function () {
-            return Math.floor(this.time / 1000);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TimeClock.prototype, "minutes", {
-        /**
-         * get time as minutes.
-         * @return
-         */
-        get: function () {
-            return Math.floor(this.time / (1000 * 60));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TimeClock.prototype, "hours", {
-        /**
-         * get time as hours.
-         * @return
-         */
-        get: function () {
-            return Math.floor(this.time / (1000 * 60 * 60));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TimeClock.prototype, "days", {
-        /**
-         * get time as days
-         * @return
-         */
-        get: function () {
-            return Math.floor(this.time / (1000 * 60 * 60 * 24));
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(TimeClock.prototype, "remain", {
-        /**
-         * get remain clock if it exists.
-         * @return
-         */
-        get: function () {
-            return this.distance
-                ? new TimeClock(this.distance.time - this.time)
-                : this.timeout
-                    ? new TimeClock(this.timeout.time - this.time)
-                    : null;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * set timeout.
-     * @param  ms milliseconds
-     * @return
-     */
-    TimeClock.prototype.setTimeout = function (ms) {
-        this.timeout = new TimeClock(ms);
-        return this;
-    };
-    /**
-     * Set startDate and endDate.
-     * @param  start
-     * @param  end
-     * @return
-     */
-    TimeClock.prototype.setDistance = function (start, end) {
-        this.startDate = start instanceof Date ? start : new Date(start);
-        this.endDate = end instanceof Date ? end : new Date(end);
-        this.distance = new TimeClock(this.endDate.getTime() - this.startDate.getTime());
-        return this;
-    };
-    /**
-     * Returns time as data object.
-     * @return
-     */
-    TimeClock.prototype.toData = function () {
-        var t = this.time;
-        return {
-            day: Math.floor(t / (1000 * 60 * 60 * 24)),
-            hour: Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-            min: Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)),
-            sec: Math.floor((t % (1000 * 60)) / 1000),
-            ms: t % 1000,
-        };
-    };
-    /**
-     * Returns time as string. e.g. '2d 05h 33m 21s 420ms'
-     * @return
-     */
-    TimeClock.prototype.toTimeString = function () {
-        var t = this.toData();
-        var refine = function (num) { return Object(_utils__WEBPACK_IMPORTED_MODULE_0__["padStart"])(num.toString(), 2, '0'); };
-        var str = '';
-        if (t.day > 0) {
-            str += t.day + "d";
-        }
-        if (str.length > 0 || t.hour > 0) {
-            str += " " + refine(t.hour) + "h";
-        }
-        if (str.length > 0 || t.min > 0) {
-            str += " " + refine(t.min) + "m";
-        }
-        if (str.length > 0 || t.sec > 0) {
-            str += " " + refine(t.sec) + "s";
-        }
-        str += " " + t.ms + "ms";
-        return str.trim();
-    };
-    return TimeClock;
-}());
-
-/* harmony default export */ __webpack_exports__["default"] = (TimeClock);
-
-
-/***/ }),
-
-/***/ "./src/utils.ts":
-/*!**********************!*\
-  !*** ./src/utils.ts ***!
-  \**********************/
-/*! exports provided: padStart, padEnd */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "padStart", function() { return padStart; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "padEnd", function() { return padEnd; });
-function padStart(str, length, chars) {
-    var space = length - str.length;
-    return space > 0 ? "" + makePad(chars, space) + str : str;
-}
-function padEnd(str, length, chars) {
-    var space = length - str.length;
-    return space > 0 ? "" + str + makePad(chars, space) : str;
-}
-function makePad(chars, limit) {
-    while (chars.length < limit) {
-        chars += chars;
-    }
-    return chars.substring(0, limit);
-}
-
-
-/***/ })
-
-/******/ });
+/******/ 	return __webpack_exports__;
+/******/ })()
+;
 });
 //# sourceMappingURL=duck-timer.js.map
