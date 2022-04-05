@@ -1,6 +1,6 @@
 # DuckTimer
 
-[![Build Status](https://travis-ci.org/archco/duck-timer.svg?branch=master)](https://travis-ci.org/archco/duck-timer)
+[![Node.js CI](https://github.com/archco/duck-timer/actions/workflows/node.js.yml/badge.svg)](https://github.com/archco/duck-timer/actions/workflows/node.js.yml)
 [![npm version](https://badge.fury.io/js/duck-timer.svg)](https://www.npmjs.com/package/duck-timer)
 [![Downloads](https://img.shields.io/npm/dm/duck-timer.svg)](https://www.npmjs.com/package/duck-timer)
 
